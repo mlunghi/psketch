@@ -1,8 +1,8 @@
-from reflex import ReflexModel
-from attentive import AttentiveModel
-from modular import ModularModel
-from modular_ac import ModularACModel
-from keyboard import KeyboardModel
+from models.reflex import ReflexModel
+from models.attentive import AttentiveModel
+from models.modular import ModularModel
+from models.modular_ac import ModularACModel
+from models.keyboard import KeyboardModel
 
 def load(config):
     cls_name = config.model.name

@@ -1,4 +1,4 @@
-import net
+import models.net
 
 import numpy as np
 import tensorflow as tf

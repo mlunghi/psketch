@@ -1,4 +1,4 @@
-from cookbook import Cookbook
+from worlds.cookbook import Cookbook
 from misc import array
 
 import curses

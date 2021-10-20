@@ -1,4 +1,4 @@
-from cookbook import Cookbook
+from worlds.cookbook import Cookbook
 import numpy as np
 
 SIZE = 5

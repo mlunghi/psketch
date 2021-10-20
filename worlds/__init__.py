@@ -1,6 +1,6 @@
-from line import LineWorld
-from craft import CraftWorld
-from light import LightWorld
+from worlds.line import LineWorld
+from worlds.craft import CraftWorld
+from worlds.light import LightWorld
 
 def load(config):
     cls_name = config.world.name
