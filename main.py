@@ -16,6 +16,11 @@ import yaml
 
 import shutil
 
+# ignore warnings if on gpu
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
+import tensorflow as tf
+
 def main():
     print("A")
     config = configure()
