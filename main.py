@@ -19,15 +19,15 @@ import shutil
 def main():
     print("A")
     config = configure()
-    print("B")
+    print("step1")
     world = worlds.load(config)
-    print("C")
+    print("step2")
     model = models.load(config)
-    print("D")
+    print("step3")
     trainer = trainers.load(config)
-    print("E")
+    print("step4")
     trainer.train(model, world)
-    print("F")
+    print("step5")
 
 def configure():
     # load config
