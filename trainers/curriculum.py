@@ -23,7 +23,7 @@ class CurriculumTrainer(object):
         self.subtask_index = util.Index()
         self.task_index = util.Index()
         with open(config.trainer.hints) as hints_f:
-            self.hints = yaml.load(hints_f)
+            self.hints = yaml.load(hints_f, Loader=yaml.FullLoader)
 
         # initialize randomness
         self.random = np.random.RandomState(0)

@@ -14,20 +14,30 @@ import tensorflow as tf
 import traceback
 import yaml
 
+import shutil
+
 def main():
+    print("A")
     config = configure()
+    print("B")
     world = worlds.load(config)
+    print("C")
     model = models.load(config)
+    print("D")
     trainer = trainers.load(config)
+    print("E")
     trainer.train(model, world)
+    print("F")
 
 def configure():
     # load config
     with open("config.yaml") as config_f:
-        config = Struct(**yaml.load(config_f))
+        config = Struct(**yaml.load(config_f, Loader=yaml.FullLoader))
 
     # set up experiment
     config.experiment_dir = os.path.join("experiments/%s" % config.name)
+    if os.path.exists(config.experiment_dir):
+        shutil.rmtree(config.experiment_dir)
     assert not os.path.exists(config.experiment_dir), \
             "Experiment %s already exists!" % config.experiment_dir
     os.mkdir(config.experiment_dir)
