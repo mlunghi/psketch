@@ -69,11 +69,11 @@ class LightWorld(object):
             dx = x - px
             dy = y - py
             cx = ROOM_W * (init_x + px) + ROOM_W / 2
-            cy = ROOM_H * (init_y + py) + ROOM_H / 2             
-            wx = cx + ROOM_W / 2 * dx
-            wy = cy + ROOM_H / 2 * dy
-            kx = cx + self.random.randint(ROOM_W / 2 + 1) - 1
-            ky = cy + self.random.randint(ROOM_H / 2 + 1) - 1
+            cy = ROOM_H * (init_y + py) + ROOM_H / 2
+            wx = int(cx + ROOM_W / 2 * dx)
+            wy = int(cy + ROOM_H / 2 * dy)
+            kx = int(cx + self.random.randint(ROOM_W / 2 + 1) - 1)
+            ky = int(cy + self.random.randint(ROOM_H / 2 + 1) - 1)
             walls[wx, wy] = 0
             doors.append((wx, wy))
             if self.random.rand() < 0.5:
@@ -89,12 +89,12 @@ class LightWorld(object):
             dx, dy = (1, 0) if self.random.randint(2) else (0, 1)
             cx = ROOM_W * px + ROOM_W / 2
             cy = ROOM_H * py + ROOM_H / 2
-            wx = cx + ROOM_W / 2 * dx
-            wy = cy + ROOM_H / 2 * dy
+            wx = int(cx + ROOM_W / 2 * dx)
+            wy = int(cy + ROOM_H / 2 * dy)
             if (wx, wy) in doors:
                 continue
-            kx = cx + self.random.randint(ROOM_W / 2 + 1) - 1
-            ky = cy + self.random.randint(ROOM_H / 2 + 1) - 1
+            kx = int(cx + self.random.randint(ROOM_W / 2 + 1) - 1)
+            ky = int(cy + self.random.randint(ROOM_H / 2 + 1) - 1)
             walls[wx, wy] = 0
             doors.append((wx, wy))
             if self.random.rand() < 0.5:
@@ -174,8 +174,8 @@ class LightScenario(object):
 
     def init(self):
         ix, iy = self.init_room
-        ix = ROOM_W * ix + ROOM_W / 2
-        iy = ROOM_H * iy + ROOM_H / 2
+        ix = int(ROOM_W * ix + ROOM_W / 2)
+        iy = int(ROOM_H * iy + ROOM_H / 2)
         s = LightState(self.walls, self.doors, self.keys, (ix, iy), self)
         return s
 
@@ -227,7 +227,7 @@ class LightState(object):
             if (x, y) in self.keys:
                 del n_keys[(x, y)]
 
-        nx, ny = x + dx, y + dy
+        nx, ny = int(x + dx), int(y + dy)
         if self.walls[nx, ny]:
             nx, ny = x, y
         if (nx, ny) in self.doors and (nx, ny) in self.keys.values():

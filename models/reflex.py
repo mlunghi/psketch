@@ -24,29 +24,29 @@ class ReflexModel(object):
         self.n_actions = world.n_actions + 1
 
         def predictor(scope):
-            with tf.variable_scope(scope):
-                t_plan = tf.placeholder(tf.int32, shape=[None, 2])
+            with tf.compat.v1.variable_scope(scope):
+                t_plan = tf.compat.v1.placeholder(tf.int32, shape=[None, 2])
                 t_embed_plan, v_emb = net.embed(t_plan, self.world.cookbook.n_kinds, N_EMBED, multi=True)
-                t_features = tf.placeholder(tf.float32, shape=[None, world.n_features])
+                t_features = tf.compat.v1.placeholder(tf.float32, shape=[None, world.n_features])
                 t_comb = tf.concat(1, (t_embed_plan, t_features))
                 t_scores, v_weights = net.mlp(t_comb, [N_HIDDEN, self.n_actions])
             return t_features, t_plan, t_scores, v_weights + v_emb
 
         t_features, t_plan, t_scores, v_weights = predictor("now")
         t_features_next, t_plan_next, t_scores_next, v_weights_next = predictor("next")
-        t_rewards = tf.placeholder(tf.float32, shape=[None])
-        t_actions = tf.placeholder(tf.float32, shape=[None, self.n_actions])
-        t_chosen_scores = tf.reduce_sum(t_scores * t_actions, reduction_indices=(1,))
-        t_max_scores_next = tf.reduce_max(t_scores_next, reduction_indices=(1,))
+        t_rewards = tf.compat.v1.placeholder(tf.float32, shape=[None])
+        t_actions = tf.compat.v1.placeholder(tf.float32, shape=[None, self.n_actions])
+        t_chosen_scores = tf.reduce_sum(t_scores * t_actions, axis=(1,))
+        t_max_scores_next = tf.reduce_max(t_scores_next, axis=(1,))
         t_td = t_rewards + DISCOUNT * t_max_scores_next - t_chosen_scores
         t_err = tf.reduce_mean(tf.minimum(tf.square(t_td), 1))
         opt = tf.train.AdamOptimizer()
         t_train_op = opt.minimize(t_err, var_list=v_weights)
         t_assign_ops = [wn.assign(w) for (w, wn) in zip(v_weights, v_weights_next)]
 
-        self.session = tf.Session()
+        self.session = tf.compat.v1.Session()
 
-        self.session.run(tf.initialize_all_variables())
+        self.session.run(tf.compat.v1.initialize_all_variables())
 
         self.t_features = t_features
         self.t_plan = t_plan

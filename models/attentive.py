@@ -26,18 +26,18 @@ class AttentiveModel(object):
                 np.zeros((N_BATCH, N_HIDDEN), dtype=np.float32))
 
         def predictor(scope):
-            with tf.variable_scope(scope) as vs:
-                t_episode_features = tf.placeholder(tf.float32,
+            with tf.compat.v1.variable_scope(scope) as vs:
+                t_episode_features = tf.compat.v1.placeholder(tf.float32,
                             shape=(N_BATCH, MAX_REPLAY_LEN, world.n_features))
-                t_episode_lengths = tf.placeholder(tf.int32, shape=(N_BATCH,))
-                t_state_features = tf.placeholder(tf.float32,
+                t_episode_lengths = tf.compat.v1.placeholder(tf.int32, shape=(N_BATCH,))
+                t_state_features = tf.compat.v1.placeholder(tf.float32,
                             shape=(1, world.n_features))
                 t_rnn_state = (
-                        tf.placeholder(tf.float32, shape=(1, N_HIDDEN)),
-                        tf.placeholder(tf.float32, shape=(1, N_HIDDEN)))
+                        tf.compat.v1.placeholder(tf.float32, shape=(1, N_HIDDEN)),
+                        tf.compat.v1.placeholder(tf.float32, shape=(1, N_HIDDEN)))
                 t_episode_state = tf.nn.rnn_cell.LSTMStateTuple(
-                        tf.placeholder(tf.float32, shape=(N_BATCH, N_HIDDEN)),
-                        tf.placeholder(tf.float32, shape=(N_BATCH, N_HIDDEN)))
+                        tf.compat.v1.placeholder(tf.float32, shape=(N_BATCH, N_HIDDEN)),
+                        tf.compat.v1.placeholder(tf.float32, shape=(N_BATCH, N_HIDDEN)))
 
                 cell = tf.nn.rnn_cell.LSTMCell(N_HIDDEN, state_is_tuple=True)
                 proj_cell = tf.nn.rnn_cell.OutputProjectionWrapper(cell, world.n_actions)
@@ -76,8 +76,8 @@ class AttentiveModel(object):
         t_ep_features_next, t_ep_state_next, t_ep_lengths_next, t_ep_scores_next, _, _, _, _, \
                 v_weights_next = predictor("next")
 
-        t_rewards = tf.placeholder(tf.float32, shape=(N_BATCH, MAX_REPLAY_LEN))
-        t_actions = tf.placeholder(tf.float32, shape=(N_BATCH, MAX_REPLAY_LEN, world.n_actions))
+        t_rewards = tf.compat.v1.placeholder(tf.float32, shape=(N_BATCH, MAX_REPLAY_LEN))
+        t_actions = tf.compat.v1.placeholder(tf.float32, shape=(N_BATCH, MAX_REPLAY_LEN, world.n_actions))
         t_chosen_scores = tf.reduce_sum(t_ep_scores * t_actions, reduction_indices=(2,))
         t_max_scores_next = tf.reduce_max(t_ep_scores_next, reduction_indices=(2,))
         t_td = t_rewards + DISCOUNT * t_max_scores_next - t_chosen_scores
@@ -86,9 +86,9 @@ class AttentiveModel(object):
         t_train_op = opt.minimize(t_err, var_list=v_weights)
         t_assign_ops = [wn.assign(w) for (w, wn) in zip(v_weights, v_weights_next)]
 
-        self.session = tf.Session()
+        self.session = tf.compat.v1.Session()
 
-        self.session.run(tf.initialize_all_variables())
+        self.session.run(tf.compat.v1.initialize_all_variables())
 
         self.t_ep_features = t_ep_features
         self.t_ep_lengths = t_ep_lengths

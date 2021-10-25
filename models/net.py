@@ -8,10 +8,10 @@ def mlp(t_in, widths):
     prev_width = t_in.get_shape()[1]
     prev_layer = t_in
     for i_layer, width in enumerate(widths):
-        v_w = tf.get_variable("w%d" % i_layer, shape=(prev_width, width),
-                initializer=tf.uniform_unit_scaling_initializer(
+        v_w = tf.compat.v1.get_variable("w%d" % i_layer, shape=(prev_width, width),
+                initializer=tf.compat.v1.uniform_unit_scaling_initializer(
                     factor=RELU_SCALE))
-        v_b = tf.get_variable("b%d" % i_layer, shape=(width,),
+        v_b = tf.compat.v1.get_variable("b%d" % i_layer, shape=(width,),
                 initializer=tf.constant_initializer(0.0))
         weights += [v_w, v_b]
         t_layer = tf.matmul(prev_layer, v_w) + v_b
@@ -24,12 +24,12 @@ def mlp(t_in, widths):
 
 def embed(t_in, n_embeddings, size, multi=False):
     if multi:
-        varz = [tf.get_variable("embed%d" % i, shape=(n_embeddings, size),
-                    initializer=tf.uniform_unit_scaling_initializer())
+        varz = [tf.compat.v1.get_variable("embed%d" % i, shape=(n_embeddings, size),
+                    initializer=tf.compat.v1.uniform_unit_scaling_initializer())
                 for i in range(t_in.get_shape()[1])]
     else:
-        varz = [tf.get_variable("embed", shape=(n_embeddings, size),
-                    initializer=tf.uniform_unit_scaling_initializer())]
+        varz = [tf.compat.v1.get_variable("embed", shape=(n_embeddings, size),
+                    initializer=tf.compat.v1.uniform_unit_scaling_initializer())]
     embedded = tf.nn.embedding_lookup(varz, t_in)
     eshape = embedded.get_shape()
     if multi:

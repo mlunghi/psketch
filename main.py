@@ -22,17 +22,12 @@ os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 import tensorflow as tf
 
 def main():
-    print("A")
+    tf.compat.v1.disable_eager_execution()
     config = configure()
-    print("step1")
     world = worlds.load(config)
-    print("step2")
     model = models.load(config)
-    print("step3")
     trainer = trainers.load(config)
-    print("step4")
     trainer.train(model, world)
-    print("step5")
 
 def configure():
     # load config

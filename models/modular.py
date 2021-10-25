@@ -32,17 +32,17 @@ class ModularModel(object):
         self.n_actions = world.n_actions + 1
 
         def predictor(scope):
-            with tf.variable_scope(scope):
-                t_arg = tf.placeholder(tf.int32, shape=[None])
+            with tf.compat.v1.variable_scope(scope):
+                t_arg = tf.compat.v1.placeholder(tf.int32, shape=[None])
                 t_embed, v_embed = net.embed(t_arg, self.world.cookbook.n_kinds, N_EMBED)
-                t_feats = tf.placeholder(tf.float32, shape=[None, world.n_features + 1])
+                t_feats = tf.compat.v1.placeholder(tf.float32, shape=[None, world.n_features + 1])
                 t_comb = tf.concat(1, (t_embed, t_feats))
                 t_scores, v_weights = net.mlp(t_comb, [N_HIDDEN, self.n_actions])
                 #t_scores, v_weights = net.mlp(t_comb, [self.n_actions])
             return t_arg, t_feats, t_scores, v_embed + v_weights
 
-        t_rewards = tf.placeholder(tf.float32, shape=[None])
-        t_actions = tf.placeholder(tf.float32, shape=[None, self.n_actions])
+        t_rewards = tf.compat.v1.placeholder(tf.float32, shape=[None])
+        t_actions = tf.compat.v1.placeholder(tf.float32, shape=[None, self.n_actions])
         t_assign_ops = []
         modules = {}
         for i_module in range(N_MODULES):
@@ -54,7 +54,7 @@ class ModularModel(object):
                     t_scores, t_scores_n, v)
 
 
-        self.session = tf.Session()
+        self.session = tf.compat.v1.Session()
 
         self.t_rewards = t_rewards
         self.t_actions = t_actions
@@ -64,8 +64,8 @@ class ModularModel(object):
 
 
         def trainer(t_rewards, t_actions, mod, mod_n, opt):
-            t_score_chosen = tf.reduce_sum(mod.t_scores * t_actions, reduction_indices=(1,))
-            t_score_n_best = tf.reduce_max(mod_n.t_scores_n, reduction_indices=(1,))
+            t_score_chosen = tf.reduce_sum(mod.t_scores * t_actions, axis=(1,))
+            t_score_n_best = tf.reduce_max(mod_n.t_scores_n, axis=(1,))
             t_td = t_rewards + DISCOUNT * t_score_n_best - t_score_chosen
             t_err = tf.reduce_mean(tf.minimum(tf.square(t_td), 1))
             t_train_op = opt.minimize(t_err, var_list=mod.v)
@@ -78,7 +78,7 @@ class ModularModel(object):
                 self.cached_train_ops[mod1, mod2] = trainer(self.t_rewards,
                         self.t_actions, self.modules[mod1], self.modules[mod2],
                         opt)
-        self.session.run(tf.initialize_all_variables())
+        self.session.run(tf.compat.v1.initialize_all_variables())
 
     def t_train_ops(self, mod1, mod2):
         return self.cached_train_ops[mod1, mod2]
