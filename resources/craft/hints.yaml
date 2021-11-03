@@ -1,29 +1,29 @@
 "make[plank]":
-  ["get_wood", "make0"]
+  ["get_wood", "use_toolshed"]
 
 "make[stick]":
-  ["get_wood", "make1"]
+  ["get_wood", "use_workbench"]
 
 "make[cloth]":
-  ["get_grass", "make2"]
+  ["get_grass", "use_factory"]
 
 "make[rope]":
-  ["get_grass", "make0"]
+  ["get_grass", "use_toolshed"]
 
 "make[bridge]":
-  ["get_iron", "get_wood", "make2"]
+  ["get_iron", "get_wood", "use_factory"]
 
 "make[bed]":
-  ["get_wood", "make0", "get_grass", "make1"]
+  ["get_wood", "use_toolshed", "get_grass", "use_workbench"]
 
 "make[axe]":
-  ["get_wood", "make1", "get_iron", "make0"]
+  ["get_wood", "use_workbench", "get_iron", "use_toolshed"]
 
 "make[shears]":
-  ["get_wood", "make1", "get_iron", "make1"]
+  ["get_wood", "use_workbench", "get_iron", "use_workbench"]
 
 "get[gold]":
-  ["get_iron", "get_wood", "make2", "get_gold"]
+  ["get_iron", "get_wood", "use_factory", "get_gold"]
 
 "get[gem]":
-  ["get_wood", "make1", "get_iron", "make0", "get_gem"]
+  ["get_wood", "use_workbench", "get_iron", "use_toolshed", "get_gem"]

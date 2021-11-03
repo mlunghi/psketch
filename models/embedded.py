@@ -8,6 +8,8 @@ import os
 import tensorflow as tf
 from tensorflow.python.framework.ops import IndexedSlicesValue
 
+import json
+
 N_UPDATE = 2000
 N_BATCH = 2000
 
@@ -116,6 +118,13 @@ class EmbeddedModel(object):
         t_action_mask = tf.compat.v1.placeholder(tf.float32, shape=(None, self.n_actions))
         t_reward = tf.compat.v1.placeholder(tf.float32, shape=(None,))
 
+        with open("word2vec/concatenated.json", "r") as fin:
+            embeddings = json.load(fin)
+        self.subtask_embeddings = []
+        for i_module in range(self.n_modules):
+            subtask = trainer.subtask_index.get(i_module)
+            self.subtask_embeddings.append(embeddings[subtask])
+
         # if self.config.model.use_args:
         #     t_embed, v_embed = net.embed(t_arg, len(trainer.cookbook.index),
         #             N_EMBED)
@@ -141,13 +150,9 @@ class EmbeddedModel(object):
         #     for i_module in range(self.n_modules):
         #         actor = build_actor(i_module, t_input, t_action_mask, extra_params=xp)
         #         actors[i_module] = actor
-        self.subtask_embeddings = []
         actor = build_actor(0, t_input, t_action_mask, extra_params=xp)
         for i_module in range(self.n_modules):
             actors[i_module] = actor
-            subtask = trainer.subtask_index.get(i_module)
-            # TODO: append subtask embedding 
-            self.subtask_embeddings.append()
 
 
         if self.config.model.baseline == "common":
@@ -257,8 +262,8 @@ class EmbeddedModel(object):
                 continue
             actor = self.actors[self.subtasks[indices[0]][i_subtask]]
 
-            # i_subtask is the index of the current subtask for a current task?
-            # self.subtasks[indices[0]][i_subtask] is the index of the subtask across all tasks?
+            # i_subtask: index of the current subtask for a current task?
+            # self.subtasks[indices[0]][i_subtask]: index of the subtask across all tasks?
 
             feed_dict = {
                 self.inputs.t_feats: [self.featurize(states[i], mstates[i]) for i in indices],

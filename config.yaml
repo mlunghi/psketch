@@ -1,9 +1,9 @@
-name: craft_2951x
+name: craft_embedded_model
 recipes: "resources/craft/recipes.yaml"
 world: 
   name: CraftWorld
 model: 
-  name: ModularACModel
+  name: EmbeddedModel
   use_args: false
   featurize_plan: false
   max_subtask_timesteps: 15

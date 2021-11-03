@@ -14,7 +14,7 @@ import tensorflow as tf
 import traceback
 import yaml
 
-import shutil
+# import shutil
 
 def main():
     tf.compat.v1.disable_eager_execution()
@@ -31,8 +31,8 @@ def configure():
 
     # set up experiment
     config.experiment_dir = os.path.join("experiments/%s" % config.name)
-    if os.path.exists(config.experiment_dir):
-        shutil.rmtree(config.experiment_dir)
+    # if os.path.exists(config.experiment_dir):
+    #     shutil.rmtree(config.experiment_dir)
     assert not os.path.exists(config.experiment_dir), \
             "Experiment %s already exists!" % config.experiment_dir
     os.mkdir(config.experiment_dir)
