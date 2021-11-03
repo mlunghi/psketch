@@ -3,6 +3,7 @@ from models.attentive import AttentiveModel
 from models.modular import ModularModel
 from models.modular_ac import ModularACModel
 from models.keyboard import KeyboardModel
+from models.embedded import EmbeddedModel
 
 def load(config):
     cls_name = config.model.name

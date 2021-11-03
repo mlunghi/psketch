@@ -34,3 +34,7 @@ def embed(t_in, n_embeddings, size, multi=False):
     if multi:
         embedded = tf.reshape(embedded, (-1, eshape[1].value * eshape[2].value))
     return embedded, varz
+
+def fixed_embed(t_in, varz):
+    embedded = tf.nn.embedding_lookup(varz, t_in)
+    return embedded
