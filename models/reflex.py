@@ -46,7 +46,7 @@ class ReflexModel(object):
 
         self.session = tf.compat.v1.Session()
 
-        self.session.run(tf.compat.v1.initialize_all_variables())
+        self.session.run(tf.compat.v1.global_variables_initializer())
 
         self.t_features = t_features
         self.t_plan = t_plan

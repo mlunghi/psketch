@@ -9,8 +9,7 @@ def mlp(t_in, widths):
     prev_layer = t_in
     for i_layer, width in enumerate(widths):
         v_w = tf.compat.v1.get_variable("w%d" % i_layer, shape=(prev_width, width),
-                initializer=tf.compat.v1.uniform_unit_scaling_initializer(
-                    factor=RELU_SCALE))
+                initializer=tf.keras.initializers.VarianceScaling(distribution="uniform"))
         v_b = tf.compat.v1.get_variable("b%d" % i_layer, shape=(width,),
                 initializer=tf.constant_initializer(0.0))
         weights += [v_w, v_b]
@@ -25,11 +24,11 @@ def mlp(t_in, widths):
 def embed(t_in, n_embeddings, size, multi=False):
     if multi:
         varz = [tf.compat.v1.get_variable("embed%d" % i, shape=(n_embeddings, size),
-                    initializer=tf.compat.v1.uniform_unit_scaling_initializer())
+                    initializer=tf.keras.initializers.VarianceScaling(distribution="uniform"))
                 for i in range(t_in.get_shape()[1])]
     else:
         varz = [tf.compat.v1.get_variable("embed", shape=(n_embeddings, size),
-                    initializer=tf.compat.v1.uniform_unit_scaling_initializer())]
+                    initializer=tf.keras.initializers.VarianceScaling(distribution="uniform"))]
     embedded = tf.nn.embedding_lookup(varz, t_in)
     eshape = embedded.get_shape()
     if multi:

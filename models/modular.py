@@ -78,7 +78,7 @@ class ModularModel(object):
                 self.cached_train_ops[mod1, mod2] = trainer(self.t_rewards,
                         self.t_actions, self.modules[mod1], self.modules[mod2],
                         opt)
-        self.session.run(tf.compat.v1.initialize_all_variables())
+        self.session.run(tf.compat.v1.global_variables_initializer())
 
     def t_train_ops(self, mod1, mod2):
         return self.cached_train_ops[mod1, mod2]

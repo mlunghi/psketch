@@ -167,7 +167,7 @@ class ModularACModel(object):
         self.saver = tf.compat.v1.train.Saver()
 
         self.session = tf.compat.v1.Session()
-        self.session.run(tf.compat.v1.initialize_all_variables())
+        self.session.run(tf.compat.v1.global_variables_initializer())
         self.session.run([actor.t_decrement_op for actor in actors.values()])
 
         self.actors = actors
