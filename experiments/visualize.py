@@ -204,7 +204,8 @@ if __name__ == "__main__":
     plot_means("Crafting environment",
         [
         ("craft_modular_state-baseline", ("Modular\n(ours)", "b", "-"), 1),
-        ("craft_2951x", ("", "k", "-"), 1)
+        ("craft_recreated_baseline", ("Recreated Baseline", "k", "-"), 1),
+        ("craft_recreated_baseline_modified_hints", ("RB (w/ modified hints)", "r", "-"), 1)
         ],
         10,
         "craft_comparison.jpg"
