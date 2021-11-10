@@ -1,0 +1,135 @@
+2021-11-10 16:07:38,135 INFO     BEGIN
+2021-11-10 16:07:38,135 INFO     struct {
+    name: 'craft_embedded_model'
+    recipes: 'resources/craft/recipes.yaml'
+    world:
+        name: 'CraftWorld'
+    model:
+        name: 'EmbeddedModel'
+        use_args: False
+        featurize_plan: False
+        max_subtask_timesteps: 15
+        baseline: 'state'
+    trainer:
+        name: 'CurriculumTrainer'
+        use_curriculum: True
+        improvement_threshold: 0.8
+        hints: 'resources/craft/hints.yaml'
+        max_timesteps: 100
+    experiment_dir: 'experiments/craft_embedded_model'
+}
+2021-11-10 16:07:38,838 WARNING  From /users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/training/rmsprop.py:123: calling Ones.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2021-11-10 16:08:04,536 INFO     [max steps] 1
+2021-11-10 16:08:04,536 INFO     [min reward] inf
+2021-11-10 16:08:04,536 INFO     
+2021-11-10 16:08:06,251 INFO     [max steps] 2
+2021-11-10 16:08:06,523 ERROR    Uncaught exception: ConcatOp : Dimensions of inputs should match: shape[0] = [1,200] vs. shape[1] = [29,1076]
+	 [[node concat (defined at /gpfs/data/sbach/tliu46/psketch/models/embedded.py:138) ]]
+
+Errors may have originated from an input operation.
+Input Source operations connected to node concat:
+ Placeholder_2 (defined at /gpfs/data/sbach/tliu46/psketch/models/embedded.py:117)	
+ embedding_lookup/Identity (defined at /gpfs/data/sbach/tliu46/psketch/models/net.py:39)
+
+Original stack trace for 'concat':
+  File "main.py", line 55, in <module>
+    main()
+  File "main.py", line 25, in main
+    trainer.train(model, world)
+  File "/gpfs/data/sbach/tliu46/psketch/trainers/curriculum.py", line 114, in train
+    model.prepare(world, self)
+  File "/gpfs/data/sbach/tliu46/psketch/models/embedded.py", line 138, in prepare
+    t_input = tf.concat((t_embed, t_feats), 1)
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/util/dispatch.py", line 206, in wrapper
+    return target(*args, **kwargs)
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/ops/array_ops.py", line 1769, in concat
+    return gen_array_ops.concat_v2(values=values, axis=axis, name=name)
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/ops/gen_array_ops.py", line 1227, in concat_v2
+    _, _, _op, _outputs = _op_def_library._apply_op_helper(
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/framework/op_def_library.py", line 748, in _apply_op_helper
+    op = g._create_op_internal(op_type_name, inputs, dtypes=None,
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/framework/ops.py", line 3561, in _create_op_internal
+    ret = Operation(
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/framework/ops.py", line 2045, in __init__
+    self._traceback = tf_stack.extract_stack_for_node(self._c_op)
+NoneType: None
+2021-11-10 16:08:06,525 ERROR    Traceback (most recent call last):
+
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/client/session.py", line 1375, in _do_call
+    return fn(*args)
+
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/client/session.py", line 1359, in _run_fn
+    return self._call_tf_sessionrun(options, feed_dict, fetch_list,
+
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/client/session.py", line 1451, in _call_tf_sessionrun
+    return tf_session.TF_SessionRun_wrapper(self._session, options, feed_dict,
+
+tensorflow.python.framework.errors_impl.InvalidArgumentError: ConcatOp : Dimensions of inputs should match: shape[0] = [1,200] vs. shape[1] = [29,1076]
+	 [[{{node concat}}]]
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "main.py", line 55, in <module>
+    main()
+
+  File "main.py", line 25, in main
+    trainer.train(model, world)
+
+  File "/gpfs/data/sbach/tliu46/psketch/trainers/curriculum.py", line 150, in train
+    transitions, reward = self.do_rollout(model, world,
+
+  File "/gpfs/data/sbach/tliu46/psketch/trainers/curriculum.py", line 83, in do_rollout
+    action, terminate = model.act(states_before)
+
+  File "/gpfs/data/sbach/tliu46/psketch/models/embedded.py", line 279, in act
+    logprobs = self.session.run([actor.t_probs], feed_dict=feed_dict)[0]
+
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/client/session.py", line 967, in run
+    result = self._run(None, fetches, feed_dict, options_ptr,
+
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/client/session.py", line 1190, in _run
+    results = self._do_run(handle, final_targets, final_fetches,
+
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/client/session.py", line 1368, in _do_run
+    return self._do_call(_run_fn, feeds, fetches, targets, options,
+
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/client/session.py", line 1394, in _do_call
+    raise type(e)(node_def, op, message)  # pylint: disable=no-value-for-parameter
+
+tensorflow.python.framework.errors_impl.InvalidArgumentError: ConcatOp : Dimensions of inputs should match: shape[0] = [1,200] vs. shape[1] = [29,1076]
+	 [[node concat (defined at /gpfs/data/sbach/tliu46/psketch/models/embedded.py:138) ]]
+
+Errors may have originated from an input operation.
+Input Source operations connected to node concat:
+ Placeholder_2 (defined at /gpfs/data/sbach/tliu46/psketch/models/embedded.py:117)	
+ embedding_lookup/Identity (defined at /gpfs/data/sbach/tliu46/psketch/models/net.py:39)
+
+Original stack trace for 'concat':
+  File "main.py", line 55, in <module>
+    main()
+  File "main.py", line 25, in main
+    trainer.train(model, world)
+  File "/gpfs/data/sbach/tliu46/psketch/trainers/curriculum.py", line 114, in train
+    model.prepare(world, self)
+  File "/gpfs/data/sbach/tliu46/psketch/models/embedded.py", line 138, in prepare
+    t_input = tf.concat((t_embed, t_feats), 1)
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/util/dispatch.py", line 206, in wrapper
+    return target(*args, **kwargs)
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/ops/array_ops.py", line 1769, in concat
+    return gen_array_ops.concat_v2(values=values, axis=axis, name=name)
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/ops/gen_array_ops.py", line 1227, in concat_v2
+    _, _, _op, _outputs = _op_def_library._apply_op_helper(
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/framework/op_def_library.py", line 748, in _apply_op_helper
+    op = g._create_op_internal(op_type_name, inputs, dtypes=None,
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/framework/ops.py", line 3561, in _create_op_internal
+    ret = Operation(
+  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/framework/ops.py", line 2045, in __init__
+    self._traceback = tf_stack.extract_stack_for_node(self._c_op)
+
+NoneType: None

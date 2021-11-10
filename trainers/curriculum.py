@@ -33,7 +33,8 @@ class CurriculumTrainer(object):
         self.tasks = []
         for hint_key, hint in self.hints.items():
             goal = util.parse_fexp(hint_key)
-            goal = (self.subtask_index.index(goal[0]), self.cookbook.index[goal[1]])
+            # goal = (self.subtask_index.index(goal[0]), self.cookbook.index[goal[1]])
+            goal = (goal[0], self.cookbook.index[goal[1]])
             if config.model.use_args:
                 steps = [util.parse_fexp(s) for s in hint]
                 steps = [(self.subtask_index.index(a), self.cookbook.index[b])

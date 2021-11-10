@@ -121,9 +121,10 @@ class EmbeddedModel(object):
         with open("word2vec/concatenated.json", "r") as fin:
             embeddings = json.load(fin)
         self.subtask_embeddings = []
-        for i_module in range(self.n_modules):
+        for i_module in range(1, self.n_modules):
             subtask = trainer.subtask_index.get(i_module)
             self.subtask_embeddings.append(embeddings[subtask])
+        self.subtask_embeddings = np.array(self.subtask_embeddings, dtype=np.float32)
 
         # if self.config.model.use_args:
         #     t_embed, v_embed = net.embed(t_arg, len(trainer.cookbook.index),
@@ -133,8 +134,8 @@ class EmbeddedModel(object):
         # else:
         #     t_input = t_feats
         #     xp = []
-        t_embed = net.fixed_embed(t_arg, self.subtask_embeddings)
-        t_input = tf.concat(1, (t_embed, t_feats))
+        t_embed = net.fixed_embed(t_arg - 1, self.subtask_embeddings)
+        t_input = tf.concat((t_embed, t_feats), 1)
         xp = []
 
         actors = {}
@@ -194,8 +195,10 @@ class EmbeddedModel(object):
         self.inputs = InputBundle(t_arg, t_step, t_feats, t_action_mask, t_reward)
 
     def init(self, states, tasks):
+        # self.subtasks - List of shape (num tasks in batch, num subtasks for task)
+        # self.i_subtasks - List of shape (num tasks in batch, 1) indicating which index of list of subtasks for each task we are on
         n_act_batch = len(states)
-        self.subtasks = [] # List of shape (num tasks in batch, num subtasks for task)
+        self.subtasks = []
         self.args = []
         self.i_task = []
         for i in range(n_act_batch):
@@ -209,7 +212,7 @@ class EmbeddedModel(object):
             self.subtasks.append(tuple(subtasks))
             self.args.append(tuple(args))
             self.i_task.append(self.trainer.task_index[tasks[i]])
-        self.i_subtask = [0 for _ in range(n_act_batch)] # List of shape (num tasks in batch, 1) indicating which index of subtask for each task we are on
+        self.i_subtask = [0 for _ in range(n_act_batch)]
         self.i_step = np.zeros((n_act_batch, 1))
         self.randoms = []
         for _ in range(n_act_batch):
@@ -264,6 +267,7 @@ class EmbeddedModel(object):
 
             # i_subtask: index of the current subtask for a current task?
             # self.subtasks[indices[0]][i_subtask]: index of the subtask across all tasks?
+            # self.subtasks -- batch size X list of subtasks
 
             feed_dict = {
                 self.inputs.t_feats: [self.featurize(states[i], mstates[i]) for i in indices],
