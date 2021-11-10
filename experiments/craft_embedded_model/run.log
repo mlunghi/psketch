@@ -1,0 +1,22 @@
+2021-11-10 14:29:25,259 INFO     BEGIN
+2021-11-10 14:29:25,259 INFO     struct {
+    name: 'craft_embedded_model'
+    recipes: 'resources/craft/recipes.yaml'
+    world:
+        name: 'CraftWorld'
+    model:
+        name: 'EmbeddedModel'
+        use_args: False
+        featurize_plan: False
+        max_subtask_timesteps: 15
+        baseline: 'state'
+    trainer:
+        name: 'CurriculumTrainer'
+        use_curriculum: True
+        improvement_threshold: 0.8
+        hints: 'resources/craft/hints.yaml'
+        max_timesteps: 100
+    experiment_dir: 'experiments/craft_embedded_model'
+}
+2021-11-10 14:29:26,733 DEBUG    Using selector: KqueueSelector
+2021-11-10 14:29:26,858 DEBUG    Using selector: KqueueSelector

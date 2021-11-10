@@ -121,12 +121,13 @@ class EmbeddedModel(object):
         with open("word2vec/concatenated.json", "r") as fin:
             embeddings = json.load(fin)
         self.subtask_embeddings = []
-        for i_module in range(self.n_modules):
+        for i_module in range(1, self.n_modules):
             print("i_module")
             print(i_module)
             print("substask index")
             print(trainer.subtask_index)
             print("embedding")
+            from IPython import embed; embed()
             subtask = trainer.subtask_index.get(i_module)
             print(len(trainer.subtask_index))
             print(subtask)
