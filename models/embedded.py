@@ -126,6 +126,8 @@ class EmbeddedModel(object):
             print(i_module)
             print("substask index")
             print(trainer.subtask_index)
+            print("embedding")
+            print(embeddings[subtask])
             subtask = trainer.subtask_index.get(i_module)
             self.subtask_embeddings.append(embeddings[subtask])
 
