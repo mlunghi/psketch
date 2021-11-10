@@ -122,6 +122,10 @@ class EmbeddedModel(object):
             embeddings = json.load(fin)
         self.subtask_embeddings = []
         for i_module in range(self.n_modules):
+            print("i_module")
+            print(i_module)
+            print("substask index")
+            print(trainer.subtask_index)
             subtask = trainer.subtask_index.get(i_module)
             self.subtask_embeddings.append(embeddings[subtask])
 
