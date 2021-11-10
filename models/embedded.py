@@ -123,6 +123,8 @@ class EmbeddedModel(object):
         self.subtask_embeddings = []
         for i_module in range(1, self.n_modules):
             subtask = trainer.subtask_index.get(i_module)
+            print(len(trainer.subtask_index))
+            print(subtask)
             self.subtask_embeddings.append(embeddings[subtask])
         self.subtask_embeddings = np.array(self.subtask_embeddings, dtype=np.float32)
 

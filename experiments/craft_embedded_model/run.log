@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 2021-11-10 16:07:38,135 INFO     BEGIN
 2021-11-10 16:07:38,135 INFO     struct {
+=======
+2021-11-10 14:34:40,799 INFO     BEGIN
+2021-11-10 14:34:40,799 INFO     struct {
+>>>>>>> 87c56696485dbcb97599244f51ded875b85afc60
     name: 'craft_embedded_model'
     recipes: 'resources/craft/recipes.yaml'
     world:
