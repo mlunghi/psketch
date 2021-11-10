@@ -35,6 +35,7 @@ class CurriculumTrainer(object):
             goal = util.parse_fexp(hint_key)
             print("GOAL")
             print(goal[0])
+            print("LOL")
             print(self.subtask_index.index(goal[0]))
             goal = (self.subtask_index.index(goal[0]), self.cookbook.index[goal[1]])
             if config.model.use_args:
