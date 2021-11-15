@@ -203,9 +203,10 @@ def plot_hist(title, experiment, n_tasks, fig_name):
 if __name__ == "__main__":
     plot_means("Crafting environment",
         [
-        ("craft_modular_state-baseline", ("Modular\n(ours)", "b", "-"), 1),
-        ("craft_recreated_baseline", ("Recreated Baseline", "k", "-"), 1),
-        ("craft_recreated_baseline_modified_hints", ("RB (w/ modified hints)", "r", "-"), 1)
+        #("craft_modular_state-baseline", ("Modular\n(ours)", "b", "-"), 1),
+        #("craft_recreated_baseline", ("Recreated Baseline", "k", "-"), 1),
+        ("craft_recreated_baseline_modified_hints", ("RB (w/ modified hints)", "r", "-"), 1),
+ 	("craft_embedded_model", ("Ours", "g", "-"), 1)
         ],
         10,
         "craft_comparison.jpg"

@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-2021-11-10 16:07:38,135 INFO     BEGIN
-2021-11-10 16:07:38,135 INFO     struct {
-=======
-2021-11-10 14:34:40,799 INFO     BEGIN
-2021-11-10 14:34:40,799 INFO     struct {
->>>>>>> 87c56696485dbcb97599244f51ded875b85afc60
+2021-11-14 17:58:37,069 INFO     BEGIN
+2021-11-14 17:58:37,069 INFO     struct {
     name: 'craft_embedded_model'
     recipes: 'resources/craft/recipes.yaml'
     world:
@@ -23,118 +18,504 @@
         max_timesteps: 100
     experiment_dir: 'experiments/craft_embedded_model'
 }
-2021-11-10 16:07:38,838 WARNING  From /users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/training/rmsprop.py:123: calling Ones.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+2021-11-14 17:58:39,217 WARNING  From /users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/training/rmsprop.py:123: calling Ones.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
 Instructions for updating:
 Call initializer instance with the dtype argument instead of passing it to the constructor
-2021-11-10 16:08:04,536 INFO     [max steps] 1
-2021-11-10 16:08:04,536 INFO     [min reward] inf
-2021-11-10 16:08:04,536 INFO     
-2021-11-10 16:08:06,251 INFO     [max steps] 2
-2021-11-10 16:08:06,523 ERROR    Uncaught exception: ConcatOp : Dimensions of inputs should match: shape[0] = [1,200] vs. shape[1] = [29,1076]
-	 [[node concat (defined at /gpfs/data/sbach/tliu46/psketch/models/embedded.py:138) ]]
-
-Errors may have originated from an input operation.
-Input Source operations connected to node concat:
- Placeholder_2 (defined at /gpfs/data/sbach/tliu46/psketch/models/embedded.py:117)	
- embedding_lookup/Identity (defined at /gpfs/data/sbach/tliu46/psketch/models/net.py:39)
-
-Original stack trace for 'concat':
-  File "main.py", line 55, in <module>
-    main()
-  File "main.py", line 25, in main
-    trainer.train(model, world)
-  File "/gpfs/data/sbach/tliu46/psketch/trainers/curriculum.py", line 114, in train
-    model.prepare(world, self)
-  File "/gpfs/data/sbach/tliu46/psketch/models/embedded.py", line 138, in prepare
-    t_input = tf.concat((t_embed, t_feats), 1)
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/util/dispatch.py", line 206, in wrapper
-    return target(*args, **kwargs)
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/ops/array_ops.py", line 1769, in concat
-    return gen_array_ops.concat_v2(values=values, axis=axis, name=name)
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/ops/gen_array_ops.py", line 1227, in concat_v2
-    _, _, _op, _outputs = _op_def_library._apply_op_helper(
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/framework/op_def_library.py", line 748, in _apply_op_helper
-    op = g._create_op_internal(op_type_name, inputs, dtypes=None,
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/framework/ops.py", line 3561, in _create_op_internal
-    ret = Operation(
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/framework/ops.py", line 2045, in __init__
-    self._traceback = tf_stack.extract_stack_for_node(self._c_op)
-NoneType: None
-2021-11-10 16:08:06,525 ERROR    Traceback (most recent call last):
-
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/client/session.py", line 1375, in _do_call
-    return fn(*args)
-
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/client/session.py", line 1359, in _run_fn
-    return self._call_tf_sessionrun(options, feed_dict, fetch_list,
-
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/client/session.py", line 1451, in _call_tf_sessionrun
-    return tf_session.TF_SessionRun_wrapper(self._session, options, feed_dict,
-
-tensorflow.python.framework.errors_impl.InvalidArgumentError: ConcatOp : Dimensions of inputs should match: shape[0] = [1,200] vs. shape[1] = [29,1076]
-	 [[{{node concat}}]]
-
-
-During handling of the above exception, another exception occurred:
-
-
-Traceback (most recent call last):
-
-  File "main.py", line 55, in <module>
-    main()
-
-  File "main.py", line 25, in main
-    trainer.train(model, world)
-
-  File "/gpfs/data/sbach/tliu46/psketch/trainers/curriculum.py", line 150, in train
-    transitions, reward = self.do_rollout(model, world,
-
-  File "/gpfs/data/sbach/tliu46/psketch/trainers/curriculum.py", line 83, in do_rollout
-    action, terminate = model.act(states_before)
-
-  File "/gpfs/data/sbach/tliu46/psketch/models/embedded.py", line 279, in act
-    logprobs = self.session.run([actor.t_probs], feed_dict=feed_dict)[0]
-
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/client/session.py", line 967, in run
-    result = self._run(None, fetches, feed_dict, options_ptr,
-
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/client/session.py", line 1190, in _run
-    results = self._do_run(handle, final_targets, final_fetches,
-
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/client/session.py", line 1368, in _do_run
-    return self._do_call(_run_fn, feeds, fetches, targets, options,
-
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/client/session.py", line 1394, in _do_call
-    raise type(e)(node_def, op, message)  # pylint: disable=no-value-for-parameter
-
-tensorflow.python.framework.errors_impl.InvalidArgumentError: ConcatOp : Dimensions of inputs should match: shape[0] = [1,200] vs. shape[1] = [29,1076]
-	 [[node concat (defined at /gpfs/data/sbach/tliu46/psketch/models/embedded.py:138) ]]
-
-Errors may have originated from an input operation.
-Input Source operations connected to node concat:
- Placeholder_2 (defined at /gpfs/data/sbach/tliu46/psketch/models/embedded.py:117)	
- embedding_lookup/Identity (defined at /gpfs/data/sbach/tliu46/psketch/models/net.py:39)
-
-Original stack trace for 'concat':
-  File "main.py", line 55, in <module>
-    main()
-  File "main.py", line 25, in main
-    trainer.train(model, world)
-  File "/gpfs/data/sbach/tliu46/psketch/trainers/curriculum.py", line 114, in train
-    model.prepare(world, self)
-  File "/gpfs/data/sbach/tliu46/psketch/models/embedded.py", line 138, in prepare
-    t_input = tf.concat((t_embed, t_feats), 1)
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/util/dispatch.py", line 206, in wrapper
-    return target(*args, **kwargs)
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/ops/array_ops.py", line 1769, in concat
-    return gen_array_ops.concat_v2(values=values, axis=axis, name=name)
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/ops/gen_array_ops.py", line 1227, in concat_v2
-    _, _, _op, _outputs = _op_def_library._apply_op_helper(
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/framework/op_def_library.py", line 748, in _apply_op_helper
-    op = g._create_op_internal(op_type_name, inputs, dtypes=None,
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/framework/ops.py", line 3561, in _create_op_internal
-    ret = Operation(
-  File "/users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/framework/ops.py", line 2045, in __init__
-    self._traceback = tf_stack.extract_stack_for_node(self._c_op)
-
-NoneType: None
+2021-11-14 17:59:02,250 INFO     [max steps] 1
+2021-11-14 17:59:02,250 INFO     [min reward] inf
+2021-11-14 17:59:02,250 INFO     
+2021-11-14 17:59:04,029 INFO     [max steps] 2
+2021-11-14 18:11:22,065 INFO     [step] 77600
+2021-11-14 18:11:22,066 INFO     [task] make[plank] 0.25 0.009832891787242715
+2021-11-14 18:11:22,066 INFO     [task] make[stick] 0.25 0.007270083605961469
+2021-11-14 18:11:22,066 INFO     [task] make[cloth] 0.25 0.008520966742408593
+2021-11-14 18:11:22,066 INFO     [task] make[rope] 0.25 0.008836752622603482
+2021-11-14 18:11:22,066 INFO     
+2021-11-14 18:11:22,066 INFO     [rollout0] [3, 2, 5, 2, 5]
+2021-11-14 18:11:22,066 INFO     [rollout1] [3, 3, 0, 0, 0, 0, 5, 4, 4, 3, 0, 5]
+2021-11-14 18:11:22,066 INFO     [rollout2] [4, 4, 1, 2, 5, 5]
+2021-11-14 18:11:22,066 INFO     [reward] 0.008621134020618478
+2021-11-14 18:11:22,066 INFO     [error] [9.83201670e-05 5.02628123e-06]
+2021-11-14 18:11:22,066 INFO     
+2021-11-14 18:11:22,067 INFO     [min reward] 0.007270083605961469
+2021-11-14 18:11:22,067 INFO     
+2021-11-14 18:11:22,067 INFO     [max steps] 2
+2021-11-14 18:24:53,234 INFO     [step] 179200
+2021-11-14 18:24:53,234 INFO     [task] make[plank] 0.2496959914745825 0.007827399872854418
+2021-11-14 18:24:53,234 INFO     [task] make[stick] 0.25033580748585654 0.006005294140887361
+2021-11-14 18:24:53,234 INFO     [task] make[cloth] 0.2500235191668254 0.004831487155314636
+2021-11-14 18:24:53,234 INFO     [task] make[rope] 0.24994468187273575 0.0074815882788450295
+2021-11-14 18:24:53,235 INFO     
+2021-11-14 18:24:53,235 INFO     [rollout0] [0, 2, 0, 5, 4, 4, 4, 3, 4, 4, 2, 4, 2, 2, 4, 4, 4, 0, 6]
+2021-11-14 18:24:53,235 INFO     [rollout1] [5, 3, 3, 0, 3, 4, 3, 1, 4, 1, 4, 0, 2, 4, 4, 6]
+2021-11-14 18:24:53,235 INFO     [rollout2] [3, 3, 4, 2, 1, 2, 2, 0, 2, 0, 1, 0, 4, 3, 6, 0, 1, 4, 3, 1, 4, 0, 4, 1, 0, 4, 4, 4, 4, 6]
+2021-11-14 18:24:53,235 INFO     [reward] 0.00653543307086608
+2021-11-14 18:24:53,235 INFO     [error] [6.90705656e-05 3.26999102e-06]
+2021-11-14 18:24:53,235 INFO     
+2021-11-14 18:24:53,235 INFO     [min reward] 0.004831487155314636
+2021-11-14 18:24:53,235 INFO     
+2021-11-14 18:24:53,235 INFO     [max steps] 2
+2021-11-14 18:37:53,260 INFO     [step] 279800
+2021-11-14 18:37:53,261 INFO     [task] make[plank] 0.24967837459042416 0.012174394244831811
+2021-11-14 18:37:53,261 INFO     [task] make[stick] 0.2501323287270985 0.007420778178900923
+2021-11-14 18:37:53,261 INFO     [task] make[cloth] 0.2504247675946184 0.010643348896098758
+2021-11-14 18:37:53,261 INFO     [task] make[rope] 0.24976452908785887 0.012511455552456469
+2021-11-14 18:37:53,261 INFO     
+2021-11-14 18:37:53,261 INFO     [rollout0] [3, 2, 3, 0, 3, 0, 5, 4, 2, 5]
+2021-11-14 18:37:53,261 INFO     [rollout1] [2, 4, 0, 2, 0, 4, 3, 0, 4, 2, 3, 4, 4, 5, 5]
+2021-11-14 18:37:53,261 INFO     [rollout2] [4, 3, 4, 2, 4, 2, 0, 4, 3, 4, 2, 1, 2, 0, 6, 3, 1, 1, 1, 0, 0, 1, 4, 4, 0, 4, 4, 2, 1, 6]
+2021-11-14 18:37:53,261 INFO     [reward] 0.010695825049701669
+2021-11-14 18:37:53,263 INFO     [error] [-7.1926322e-05  1.7383789e-05]
+2021-11-14 18:37:53,263 INFO     
+2021-11-14 18:37:53,263 INFO     [min reward] 0.007420778178900923
+2021-11-14 18:37:53,263 INFO     
+2021-11-14 18:37:53,263 INFO     [max steps] 2
+2021-11-14 18:50:43,489 INFO     [step] 380400
+2021-11-14 18:50:43,489 INFO     [task] make[plank] 0.24962801925870118 0.021800612773980675
+2021-11-14 18:50:43,489 INFO     [task] make[stick] 0.2508172408581575 0.010553042926287393
+2021-11-14 18:50:43,489 INFO     [task] make[cloth] 0.2500110439231266 0.014186658165298478
+2021-11-14 18:50:43,489 INFO     [task] make[rope] 0.24954369596001472 0.022864503663151115
+2021-11-14 18:50:43,489 INFO     
+2021-11-14 18:50:43,489 INFO     [rollout0] [0, 3, 0, 0, 3, 4, 0, 2, 0, 3, 5, 5]
+2021-11-14 18:50:43,489 INFO     [rollout1] [0, 4, 5, 4, 1, 5]
+2021-11-14 18:50:43,489 INFO     [rollout2] [4, 3, 2, 2, 3, 0, 4, 3, 0, 0, 3, 2, 3, 0, 6, 0, 5]
+2021-11-14 18:50:43,489 INFO     [reward] 0.01734592445328015
+2021-11-14 18:50:43,489 INFO     [error] [1.06346127e-04 1.90120909e-05]
+2021-11-14 18:50:43,490 INFO     
+2021-11-14 18:50:43,490 INFO     [min reward] 0.010553042926287393
+2021-11-14 18:50:43,490 INFO     
+2021-11-14 18:50:43,490 INFO     [max steps] 2
+2021-11-14 19:03:02,989 INFO     [step] 464600
+2021-11-14 19:03:02,989 INFO     [task] make[plank] 0.24887941021753016 0.04306954436450839
+2021-11-14 19:03:02,989 INFO     [task] make[stick] 0.2517121265562159 0.016781370792872632
+2021-11-14 19:03:02,989 INFO     [task] make[cloth] 0.25079699543052164 0.02427276161692482
+2021-11-14 19:03:02,989 INFO     [task] make[rope] 0.2486114677957323 0.05205152671755725
+2021-11-14 19:03:02,989 INFO     
+2021-11-14 19:03:02,989 INFO     [rollout0] [5, 1, 4, 1, 1, 3, 1, 1, 4, 1, 0, 4, 1, 4, 5]
+2021-11-14 19:03:02,990 INFO     [rollout1] [4, 1, 3, 4, 4, 3, 4, 0, 0, 3, 3, 3, 4, 3, 6, 4, 3, 0, 4, 5]
+2021-11-14 19:03:02,990 INFO     [rollout2] [4, 0, 3, 4, 0, 0, 2, 2, 4, 4, 2, 1, 4, 1, 6, 3, 1, 1, 4, 4, 4, 4, 4, 0, 0, 1, 4, 4, 1, 6]
+2021-11-14 19:03:02,990 INFO     [reward] 0.033954869358669766
+2021-11-14 19:03:02,990 INFO     [error] [-5.94534636e-05  1.57980967e-05]
+2021-11-14 19:03:02,990 INFO     
+2021-11-14 19:03:02,990 INFO     [min reward] 0.016781370792872632
+2021-11-14 19:03:02,990 INFO     
+2021-11-14 19:03:02,990 INFO     [max steps] 2
+2021-11-14 19:14:50,209 INFO     [step] 542400
+2021-11-14 19:14:50,210 INFO     [task] make[plank] 0.2476879742401309 0.0762743134257551
+2021-11-14 19:14:50,210 INFO     [task] make[stick] 0.2544219274634287 0.020199989950253756
+2021-11-14 19:14:50,210 INFO     [task] make[cloth] 0.2525029400050896 0.0327977219566765
+2021-11-14 19:14:50,210 INFO     [task] make[rope] 0.24538715829135088 0.09931471290624026
+2021-11-14 19:14:50,210 INFO     
+2021-11-14 19:14:50,210 INFO     [rollout0] [2, 2, 3, 4, 3, 5, 4, 2, 4, 0, 3, 3, 4, 3, 1, 0, 4, 4, 3, 1, 6]
+2021-11-14 19:14:50,210 INFO     [rollout1] [4, 2, 4, 4, 2, 1, 4, 2, 2, 0, 2, 4, 2, 4, 6, 1, 4, 1, 4, 3, 1, 2, 0, 0, 1, 4, 4, 4, 1, 6]
+2021-11-14 19:14:50,210 INFO     [rollout2] [2, 2, 1, 2, 4, 5, 4, 4, 4, 4, 3, 4, 2, 4, 4, 4, 4, 4, 3, 3, 6]
+2021-11-14 19:14:50,210 INFO     [reward] 0.056645244215938285
+2021-11-14 19:14:50,210 INFO     [error] [-7.56204334e-05  2.58014251e-05]
+2021-11-14 19:14:50,210 INFO     
+2021-11-14 19:14:50,210 INFO     [min reward] 0.020199989950253756
+2021-11-14 19:14:50,210 INFO     
+2021-11-14 19:14:50,210 INFO     [max steps] 2
+2021-11-14 19:25:47,010 INFO     [step] 608300
+2021-11-14 19:25:47,010 INFO     [task] make[plank] 0.24498148651107288 0.16240472092451438
+2021-11-14 19:25:47,011 INFO     [task] make[stick] 0.25969369944218706 0.025265643447461628
+2021-11-14 19:25:47,011 INFO     [task] make[cloth] 0.25638843413999257 0.04302600472813239
+2021-11-14 19:25:47,011 INFO     [task] make[rope] 0.2389363799067475 0.18634288612731423
+2021-11-14 19:25:47,011 INFO     
+2021-11-14 19:25:47,011 INFO     [rollout0] [5, 1, 1, 4, 1, 3, 4, 1, 2, 4, 0, 4, 2, 4, 5]
+2021-11-14 19:25:47,011 INFO     [rollout1] [2, 4, 4, 4, 4, 5, 5]
+2021-11-14 19:25:47,011 INFO     [rollout2] [4, 0, 3, 0, 4, 0, 3, 1, 0, 4, 4, 4, 4, 0, 6, 2, 0, 4, 0, 2, 1, 3, 0, 2, 2, 3, 2, 4, 4, 6]
+2021-11-14 19:25:47,011 INFO     [reward] 0.10223065250379365
+2021-11-14 19:25:47,011 INFO     [error] [-7.70496905e-06  3.63628695e-05]
+2021-11-14 19:25:47,011 INFO     
+2021-11-14 19:25:47,011 INFO     [min reward] 0.025265643447461628
+2021-11-14 19:25:47,011 INFO     
+2021-11-14 19:25:47,011 INFO     [max steps] 2
+2021-11-14 19:36:44,471 INFO     [step] 672400
+2021-11-14 19:36:44,472 INFO     [task] make[plank] 0.2339509972053786 0.25040606388738496
+2021-11-14 19:36:44,472 INFO     [task] make[stick] 0.2718037610463684 0.027801662367440527
+2021-11-14 19:36:44,472 INFO     [task] make[cloth] 0.26690159330792507 0.046064038839440526
+2021-11-14 19:36:44,472 INFO     [task] make[rope] 0.22734364844032803 0.26775056596007407
+2021-11-14 19:36:44,472 INFO     
+2021-11-14 19:36:44,472 INFO     [rollout0] [4, 0, 0, 3, 4, 0, 3, 4, 4, 4, 4, 4, 4, 4, 6, 4, 1, 4, 5]
+2021-11-14 19:36:44,472 INFO     [rollout1] [4, 3, 3, 4, 4, 4, 1, 4, 1, 4, 1, 1, 1, 4, 6, 5]
+2021-11-14 19:36:44,472 INFO     [rollout2] [3, 3, 3, 5, 4, 4, 4, 5]
+2021-11-14 19:36:44,472 INFO     [reward] 0.13861154446177854
+2021-11-14 19:36:44,472 INFO     [error] [1.07696543e-05 4.59776491e-05]
+2021-11-14 19:36:44,473 INFO     
+2021-11-14 19:36:44,473 INFO     [min reward] 0.027801662367440527
+2021-11-14 19:36:44,473 INFO     
+2021-11-14 19:36:44,473 INFO     [max steps] 2
+2021-11-14 19:50:10,963 INFO     [step] 754700
+2021-11-14 19:50:10,963 INFO     [task] make[plank] 0.22030129224847547 0.29861072365117447
+2021-11-14 19:50:10,963 INFO     [task] make[stick] 0.2848621516545091 0.024687168610816542
+2021-11-14 19:50:10,963 INFO     [task] make[cloth] 0.27956560445338285 0.04431708810919591
+2021-11-14 19:50:10,963 INFO     [task] make[rope] 0.21527095164363252 0.3133080695497102
+2021-11-14 19:50:10,963 INFO     
+2021-11-14 19:50:10,963 INFO     [rollout0] [1, 4, 4, 4, 1, 1, 4, 1, 1, 4, 0, 4, 1, 4, 6, 4, 5]
+2021-11-14 19:50:10,963 INFO     [rollout1] [3, 0, 3, 0, 0, 4, 0, 0, 4, 0, 0, 2, 4, 0, 6, 2, 4, 4, 4, 1, 2, 0, 2, 1, 2, 4, 2, 2, 1, 6]
+2021-11-14 19:50:10,963 INFO     [rollout2] [4, 4, 4, 4, 0, 1, 4, 1, 0, 1, 2, 0, 0, 4, 6, 2, 4, 2, 1, 3, 0, 2, 4, 2, 4, 2, 0, 2, 0, 6]
+2021-11-14 19:50:10,963 INFO     [reward] 0.15272174969623367
+2021-11-14 19:50:10,963 INFO     [error] [-1.40234575e-05  3.61520547e-05]
+2021-11-14 19:50:10,964 INFO     
+2021-11-14 19:50:10,964 INFO     [min reward] 0.024687168610816542
+2021-11-14 19:50:10,964 INFO     
+2021-11-14 19:50:10,964 INFO     [max steps] 2
+2021-11-14 20:04:03,910 INFO     [step] 839400
+2021-11-14 20:04:03,911 INFO     [task] make[plank] 0.2117811788539328 0.3250756641632104
+2021-11-14 20:04:03,911 INFO     [task] make[stick] 0.2933284488662817 0.027823635997584056
+2021-11-14 20:04:03,911 INFO     [task] make[cloth] 0.28748460551582883 0.047554291836650595
+2021-11-14 20:04:03,911 INFO     [task] make[rope] 0.20740576676395686 0.3446159044829917
+2021-11-14 20:04:03,911 INFO     
+2021-11-14 20:04:03,911 INFO     [rollout0] [3, 3, 4, 2, 3, 0, 3, 4, 1, 3, 1, 3, 3, 0, 6, 1, 1, 4, 5]
+2021-11-14 20:04:03,911 INFO     [rollout1] [4, 0, 3, 0, 3, 4, 4, 3, 2, 3, 4, 4, 4, 4, 6, 5]
+2021-11-14 20:04:03,911 INFO     [rollout2] [4, 0, 4, 1, 4, 4, 5, 0, 1, 4, 4, 4, 3, 0, 2, 1, 4, 4, 4, 0, 1, 6]
+2021-11-14 20:04:03,911 INFO     [reward] 0.1625029515938607
+2021-11-14 20:04:03,911 INFO     [error] [4.55561104e-05 3.09071776e-05]
+2021-11-14 20:04:03,911 INFO     
+2021-11-14 20:04:03,911 INFO     [min reward] 0.027823635997584056
+2021-11-14 20:04:03,911 INFO     
+2021-11-14 20:04:03,911 INFO     [max steps] 2
+2021-11-14 20:17:55,039 INFO     [step] 924100
+2021-11-14 20:17:55,040 INFO     [task] make[plank] 0.20787216455860616 0.35774631807283935
+2021-11-14 20:17:55,040 INFO     [task] make[stick] 0.2980871259509964 0.026711052986168906
+2021-11-14 20:17:55,040 INFO     [task] make[cloth] 0.2920989402159738 0.053823790680772025
+2021-11-14 20:17:55,040 INFO     [task] make[rope] 0.2019417692744237 0.3816562881918175
+2021-11-14 20:17:55,040 INFO     
+2021-11-14 20:17:55,040 INFO     [rollout0] [3, 0, 4, 2, 4, 0, 4, 3, 0, 0, 4, 2, 4, 1, 6, 2, 2, 4, 2, 0, 4, 4, 2, 4, 0, 4, 2, 4, 5]
+2021-11-14 20:17:55,040 INFO     [rollout1] [4, 4, 4, 2, 2, 4, 2, 0, 1, 4, 4, 2, 4, 5, 5]
+2021-11-14 20:17:55,040 INFO     [rollout2] [4, 4, 4, 1, 3, 4, 1, 0, 1, 4, 2, 2, 4, 1, 6, 4, 4, 4, 1, 4, 5]
+2021-11-14 20:17:55,040 INFO     [reward] 0.17511216056670578
+2021-11-14 20:17:55,040 INFO     [error] [6.11667169e-05 5.27049222e-05]
+2021-11-14 20:17:55,040 INFO     
+2021-11-14 20:17:55,041 INFO     [min reward] 0.026711052986168906
+2021-11-14 20:17:55,041 INFO     
+2021-11-14 20:17:55,041 INFO     [max steps] 2
+2021-11-14 20:31:46,381 INFO     [step] 1008900
+2021-11-14 20:31:46,382 INFO     [task] make[plank] 0.20255932044341973 0.38218205293737895
+2021-11-14 20:31:46,382 INFO     [task] make[stick] 0.3053633063720901 0.028339613935245714
+2021-11-14 20:31:46,382 INFO     [task] make[cloth] 0.29694336505945096 0.0673436877737953
+2021-11-14 20:31:46,382 INFO     [task] make[rope] 0.19513400812503937 0.4148392910784019
+2021-11-14 20:31:46,382 INFO     
+2021-11-14 20:31:46,383 INFO     [rollout0] [2, 0, 4, 2, 1, 2, 4, 4, 4, 1, 2, 1, 4, 5, 5]
+2021-11-14 20:31:46,383 INFO     [rollout1] [3, 3, 3, 4, 3, 4, 1, 4, 5, 5]
+2021-11-14 20:31:46,383 INFO     [rollout2] [0, 0, 4, 4, 4, 4, 0, 4, 4, 0, 4, 4, 4, 4, 6, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6]
+2021-11-14 20:31:46,383 INFO     [reward] 0.18685141509433953
+2021-11-14 20:31:46,383 INFO     [error] [8.14005876e-06 3.53312044e-05]
+2021-11-14 20:31:46,383 INFO     
+2021-11-14 20:31:46,383 INFO     [min reward] 0.028339613935245714
+2021-11-14 20:31:46,383 INFO     
+2021-11-14 20:31:46,383 INFO     [max steps] 2
+2021-11-14 20:45:57,153 INFO     [step] 1097200
+2021-11-14 20:45:57,154 INFO     [task] make[plank] 0.19947856060277744 0.399205222821459
+2021-11-14 20:45:57,154 INFO     [task] make[stick] 0.31190602582986066 0.02897226992071901
+2021-11-14 20:45:57,154 INFO     [task] make[cloth] 0.2995131394153182 0.07023310287506139
+2021-11-14 20:45:57,154 INFO     [task] make[rope] 0.18910227415204364 0.43098842386464825
+2021-11-14 20:45:57,154 INFO     
+2021-11-14 20:45:57,154 INFO     [rollout0] [2, 2, 0, 2, 4, 4, 2, 4, 5, 5]
+2021-11-14 20:45:57,154 INFO     [rollout1] [0, 0, 3, 0, 0, 0, 4, 2, 0, 1, 4, 5, 5]
+2021-11-14 20:45:57,154 INFO     [rollout2] [4, 0, 4, 3, 4, 0, 3, 4, 0, 3, 1, 3, 0, 4, 6, 0, 4, 3, 4, 1, 4, 4, 3, 0, 4, 4, 4, 4, 2, 6]
+2021-11-14 20:45:57,154 INFO     [reward] 0.191891279728199
+2021-11-14 20:45:57,154 INFO     [error] [6.80877721e-06 3.49086148e-05]
+2021-11-14 20:45:57,155 INFO     
+2021-11-14 20:45:57,155 INFO     [min reward] 0.02897226992071901
+2021-11-14 20:45:57,155 INFO     
+2021-11-14 20:45:57,155 INFO     [max steps] 2
+2021-11-14 21:00:36,445 INFO     [step] 1191100
+2021-11-14 21:00:36,446 INFO     [task] make[plank] 0.1963590897720366 0.4138454038242782
+2021-11-14 21:00:36,446 INFO     [task] make[stick] 0.31538205517953566 0.027118986659479854
+2021-11-14 21:00:36,446 INFO     [task] make[cloth] 0.30211746958570296 0.08642709681934288
+2021-11-14 21:00:36,446 INFO     [task] make[rope] 0.18614138546272485 0.43263856544014906
+2021-11-14 21:00:36,446 INFO     
+2021-11-14 21:00:36,446 INFO     [rollout0] [0, 3, 3, 3, 3, 3, 3, 4, 3, 4, 1, 4, 5, 5]
+2021-11-14 21:00:36,446 INFO     [rollout1] [2, 4, 1, 0, 2, 1, 2, 4, 1, 2, 0, 2, 1, 1, 6, 4, 2, 4, 1, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 6]
+2021-11-14 21:00:36,446 INFO     [rollout2] [0, 2, 2, 2, 2, 2, 4, 2, 4, 4, 2, 4, 2, 2, 6, 4, 1, 0, 2, 0, 3, 2, 2, 4, 0, 2, 4, 5]
+2021-11-14 21:00:36,446 INFO     [reward] 0.19537806176783798
+2021-11-14 21:00:36,446 INFO     [error] [-3.35260470e-05  5.51317153e-05]
+2021-11-14 21:00:36,447 INFO     
+2021-11-14 21:00:36,447 INFO     [min reward] 0.027118986659479854
+2021-11-14 21:00:36,447 INFO     
+2021-11-14 21:00:36,447 INFO     [max steps] 2
+2021-11-14 21:14:31,564 INFO     [step] 1282500
+2021-11-14 21:14:31,565 INFO     [task] make[plank] 0.1935585756954224 0.4349946135964166
+2021-11-14 21:14:31,565 INFO     [task] make[stick] 0.31912032590316247 0.031482306190264125
+2021-11-14 21:14:31,565 INFO     [task] make[cloth] 0.29986425809227774 0.10408921933085502
+2021-11-14 21:14:31,565 INFO     [task] make[rope] 0.18745684030913742 0.458561923660558
+2021-11-14 21:14:31,565 INFO     
+2021-11-14 21:14:31,565 INFO     [rollout0] [3, 1, 3, 4, 4, 0, 3, 1, 3, 4, 3, 4, 4, 4, 6, 0, 4, 3, 1, 4, 5]
+2021-11-14 21:14:31,565 INFO     [rollout1] [2, 4, 4, 4, 1, 4, 2, 2, 4, 2, 1, 2, 4, 5, 5]
+2021-11-14 21:14:31,565 INFO     [rollout2] [4, 4, 4, 4, 4, 5, 3, 0, 0, 3, 0, 2, 2, 2, 2, 4, 2, 2, 4, 4, 6]
+2021-11-14 21:14:31,565 INFO     [reward] 0.2112035010940914
+2021-11-14 21:14:31,565 INFO     [error] [-3.62684032e-05  4.62730151e-05]
+2021-11-14 21:14:31,566 INFO     
+2021-11-14 21:14:31,566 INFO     [min reward] 0.031482306190264125
+2021-11-14 21:14:31,566 INFO     
+2021-11-14 21:14:31,566 INFO     [max steps] 2
+2021-11-14 21:29:21,939 INFO     [step] 1375100
+2021-11-14 21:29:21,940 INFO     [task] make[plank] 0.1909763677740919 0.4409356725146199
+2021-11-14 21:29:21,940 INFO     [task] make[stick] 0.3249947902841068 0.029395138496325607
+2021-11-14 21:29:21,940 INFO     [task] make[cloth] 0.3008798778419708 0.1256992312966906
+2021-11-14 21:29:21,940 INFO     [task] make[rope] 0.1831489640998305 0.4747079404613651
+2021-11-14 21:29:21,940 INFO     
+2021-11-14 21:29:21,940 INFO     [rollout0] [1, 4, 1, 4, 2, 4, 5, 5]
+2021-11-14 21:29:21,940 INFO     [rollout1] [1, 3, 1, 1, 1, 4, 4, 1, 1, 4, 4, 4, 1, 4, 6, 2, 4, 0, 1, 2, 4, 1, 4, 4, 4, 5]
+2021-11-14 21:29:21,940 INFO     [rollout2] [1, 1, 1, 4, 1, 1, 1, 4, 5, 5]
+2021-11-14 21:29:21,940 INFO     [reward] 0.21910367170626335
+2021-11-14 21:29:21,940 INFO     [error] [-6.24823357e-05  3.88472608e-05]
+2021-11-14 21:29:21,941 INFO     
+2021-11-14 21:29:21,941 INFO     [min reward] 0.029395138496325607
+2021-11-14 21:29:21,941 INFO     
+2021-11-14 21:29:21,941 INFO     [max steps] 2
+2021-11-14 21:44:06,863 INFO     [step] 1467600
+2021-11-14 21:44:06,864 INFO     [task] make[plank] 0.19165177211813195 0.47450870297585623
+2021-11-14 21:44:06,864 INFO     [task] make[stick] 0.33025204775230405 0.02948322279860792
+2021-11-14 21:44:06,864 INFO     [task] make[cloth] 0.297818368191019 0.1443441548988208
+2021-11-14 21:44:06,864 INFO     [task] make[rope] 0.18027781193854503 0.4856170923848174
+2021-11-14 21:44:06,864 INFO     
+2021-11-14 21:44:06,864 INFO     [rollout0] [2, 4, 2, 4, 2, 4, 4, 4, 2, 4, 4, 4, 4, 0, 6, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 6]
+2021-11-14 21:44:06,864 INFO     [rollout1] [0, 2, 0, 0, 2, 4, 4, 4, 4, 4, 2, 4, 4, 4, 6, 4, 4, 5]
+2021-11-14 21:44:06,864 INFO     [rollout2] [0, 4, 2, 0, 0, 0, 2, 2, 4, 5, 5]
+2021-11-14 21:44:06,864 INFO     [reward] 0.23191351351351328
+2021-11-14 21:44:06,864 INFO     [error] [-9.72604470e-05  5.69214504e-05]
+2021-11-14 21:44:06,864 INFO     
+2021-11-14 21:44:06,864 INFO     [min reward] 0.02948322279860792
+2021-11-14 21:44:06,864 INFO     
+2021-11-14 21:44:06,864 INFO     [max steps] 2
+2021-11-14 21:59:10,500 INFO     [step] 1563300
+2021-11-14 21:59:10,500 INFO     [task] make[plank] 0.1842679519337457 0.4744496855345912
+2021-11-14 21:59:10,500 INFO     [task] make[stick] 0.33740570458501984 0.033976009545939836
+2021-11-14 21:59:10,500 INFO     [task] make[cloth] 0.2978809002923499 0.1789789580207279
+2021-11-14 21:59:10,500 INFO     [task] make[rope] 0.18044544318888467 0.510092587267813
+2021-11-14 21:59:10,500 INFO     
+2021-11-14 21:59:10,500 INFO     [rollout0] [3, 1, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 6, 1, 2, 1, 2, 1, 4, 4, 4, 4, 5]
+2021-11-14 21:59:10,500 INFO     [rollout1] [3, 4, 1, 4, 3, 4, 5, 5]
+2021-11-14 21:59:10,500 INFO     [rollout2] [3, 0, 4, 2, 4, 0, 2, 2, 0, 2, 4, 0, 2, 0, 6, 2, 0, 2, 0, 4, 0, 4, 0, 4, 4, 4, 4, 4, 4, 6]
+2021-11-14 21:59:10,501 INFO     [reward] 0.2458725182863111
+2021-11-14 21:59:10,501 INFO     [error] [-4.64178435e-05  5.57722615e-05]
+2021-11-14 21:59:10,501 INFO     
+2021-11-14 21:59:10,501 INFO     [min reward] 0.033976009545939836
+2021-11-14 21:59:10,501 INFO     
+2021-11-14 21:59:10,501 INFO     [max steps] 2
+2021-11-14 22:14:07,933 INFO     [step] 1659200
+2021-11-14 22:14:07,934 INFO     [task] make[plank] 0.1884080191833991 0.48460648785592336
+2021-11-14 22:14:07,934 INFO     [task] make[stick] 0.34336782511366415 0.03715254647853206
+2021-11-14 22:14:07,934 INFO     [task] make[cloth] 0.29235540375945746 0.19597738171927565
+2021-11-14 22:14:07,934 INFO     [task] make[rope] 0.17586875194347928 0.4858420268256334
+2021-11-14 22:14:07,934 INFO     
+2021-11-14 22:14:07,935 INFO     [rollout0] [2, 4, 4, 4, 4, 4, 4, 1, 4, 5, 2, 2, 4, 5]
+2021-11-14 22:14:07,935 INFO     [rollout1] [2, 4, 4, 4, 1, 4, 2, 1, 2, 1, 4, 3, 1, 3, 6, 4, 4, 0, 4, 3, 1, 4, 5]
+2021-11-14 22:14:07,935 INFO     [rollout2] [4, 2, 5, 4, 1, 4, 5]
+2021-11-14 22:14:07,935 INFO     [reward] 0.2466319082377471
+2021-11-14 22:14:07,935 INFO     [error] [1.73719620e-05 6.83479115e-05]
+2021-11-14 22:14:07,935 INFO     
+2021-11-14 22:14:07,935 INFO     [min reward] 0.03715254647853206
+2021-11-14 22:14:07,935 INFO     
+2021-11-14 22:14:07,935 INFO     [max steps] 2
+2021-11-14 22:29:04,193 INFO     [step] 1758700
+2021-11-14 22:29:04,193 INFO     [task] make[plank] 0.18523110953839478 0.49894268828281735
+2021-11-14 22:29:04,194 INFO     [task] make[stick] 0.3429840853801168 0.04204635354097688
+2021-11-14 22:29:04,194 INFO     [task] make[cloth] 0.28698929333588596 0.19511939307065693
+2021-11-14 22:29:04,194 INFO     [task] make[rope] 0.18479551174560255 0.4099863574351978
+2021-11-14 22:29:04,194 INFO     
+2021-11-14 22:29:04,194 INFO     [rollout0] [3, 4, 3, 0, 2, 4, 5, 5]
+2021-11-14 22:29:04,194 INFO     [rollout1] [3, 4, 0, 0, 4, 1, 2, 0, 2, 4, 5, 5]
+2021-11-14 22:29:04,194 INFO     [rollout2] [1, 1, 1, 4, 1, 2, 1, 4, 5, 5]
+2021-11-14 22:29:04,194 INFO     [reward] 0.23850251256281393
+2021-11-14 22:29:04,194 INFO     [error] [-8.92016315e-06  4.59537787e-05]
+2021-11-14 22:29:04,194 INFO     
+2021-11-14 22:29:04,194 INFO     [min reward] 0.04204635354097688
+2021-11-14 22:29:04,194 INFO     
+2021-11-14 22:29:04,194 INFO     [max steps] 2
+2021-11-14 22:43:39,730 INFO     [step] 1858300
+2021-11-14 22:43:39,731 INFO     [task] make[plank] 0.1765978064390691 0.5042520404086525
+2021-11-14 22:43:39,731 INFO     [task] make[stick] 0.3344800803749355 0.048805595083108784
+2021-11-14 22:43:39,731 INFO     [task] make[cloth] 0.28158510678562887 0.22449267192784667
+2021-11-14 22:43:39,731 INFO     [task] make[rope] 0.20733700640036676 0.41798122520081293
+2021-11-14 22:43:39,731 INFO     
+2021-11-14 22:43:39,731 INFO     [rollout0] [4, 4, 0, 2, 3, 1, 4, 3, 4, 3, 4, 5, 0, 5]
+2021-11-14 22:43:39,731 INFO     [rollout1] [3, 0, 4, 2, 1, 4, 3, 1, 4, 5, 2, 1, 2, 2, 4, 5]
+2021-11-14 22:43:39,731 INFO     [rollout2] [5, 1, 4, 4, 4, 4, 4, 3, 4, 0, 4, 2, 4, 1, 4, 6]
+2021-11-14 22:43:39,731 INFO     [reward] 0.25559236947791214
+2021-11-14 22:43:39,731 INFO     [error] [-2.37460430e-05  6.90999025e-05]
+2021-11-14 22:43:39,732 INFO     
+2021-11-14 22:43:39,732 INFO     [min reward] 0.048805595083108784
+2021-11-14 22:43:39,732 INFO     
+2021-11-14 22:43:39,732 INFO     [max steps] 2
+2021-11-14 22:58:13,960 INFO     [step] 1958100
+2021-11-14 22:58:13,961 INFO     [task] make[plank] 0.17780051541835504 0.5088900106567951
+2021-11-14 22:58:13,961 INFO     [task] make[stick] 0.33791705407878053 0.05734553366516646
+2021-11-14 22:58:13,962 INFO     [task] make[cloth] 0.27615258776125207 0.25259490715799304
+2021-11-14 22:58:13,962 INFO     [task] make[rope] 0.20812984274161242 0.4403460173980658
+2021-11-14 22:58:13,962 INFO     
+2021-11-14 22:58:13,962 INFO     [rollout0] [3, 3, 3, 3, 4, 3, 4, 3, 3, 3, 3, 3, 3, 4, 6, 0, 3, 0, 3, 4, 0, 0, 3, 3, 3, 4, 0, 0, 3, 6]
+2021-11-14 22:58:13,962 INFO     [rollout1] [4, 3, 3, 0, 4, 3, 5, 0, 3, 4, 5]
+2021-11-14 22:58:13,962 INFO     [rollout2] [2, 3, 1, 4, 3, 3, 5, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 4, 0, 3, 4, 6]
+2021-11-14 22:58:13,962 INFO     [reward] 0.2714529058116231
+2021-11-14 22:58:13,962 INFO     [error] [7.25518799e-06 8.22545583e-05]
+2021-11-14 22:58:13,962 INFO     
+2021-11-14 22:58:13,962 INFO     [min reward] 0.05734553366516646
+2021-11-14 22:58:13,962 INFO     
+2021-11-14 22:58:13,962 INFO     [max steps] 2
+2021-11-14 23:12:08,682 INFO     [step] 2058100
+2021-11-14 23:12:08,683 INFO     [task] make[plank] 0.1802020098488673 0.4659248186901401
+2021-11-14 23:12:08,683 INFO     [task] make[stick] 0.34257997879875024 0.07374553545289537
+2021-11-14 23:12:08,683 INFO     [task] make[cloth] 0.2723671906416933 0.2976412506856829
+2021-11-14 23:12:08,683 INFO     [task] make[rope] 0.2048508207106892 0.4728883233825976
+2021-11-14 23:12:08,683 INFO     
+2021-11-14 23:12:08,683 INFO     [rollout0] [4, 2, 4, 0, 4, 3, 0, 5, 2, 0, 2, 4, 1, 4, 2, 0, 2, 4, 4, 4, 2, 1, 6]
+2021-11-14 23:12:08,683 INFO     [rollout1] [2, 5, 0, 3, 0, 2, 0, 2, 0, 4, 2, 0, 2, 2, 2, 4, 6]
+2021-11-14 23:12:08,683 INFO     [rollout2] [4, 2, 0, 4, 4, 0, 4, 2, 4, 5, 5]
+2021-11-14 23:12:08,683 INFO     [reward] 0.28737000000000007
+2021-11-14 23:12:08,683 INFO     [error] [-5.78113356e-05  7.97894436e-05]
+2021-11-14 23:12:08,683 INFO     
+2021-11-14 23:12:08,684 INFO     [min reward] 0.07374553545289537
+2021-11-14 23:12:08,684 INFO     
+2021-11-14 23:12:08,684 INFO     [max steps] 2
+2021-11-14 23:25:52,962 INFO     [step] 2158100
+2021-11-14 23:25:52,963 INFO     [task] make[plank] 0.19930953439874372 0.4679349186483104
+2021-11-14 23:25:52,963 INFO     [task] make[stick] 0.34297547070310896 0.08498880195456793
+2021-11-14 23:25:52,963 INFO     [task] make[cloth] 0.26095638163257445 0.3294967880085653
+2021-11-14 23:25:52,963 INFO     [task] make[rope] 0.19675861326557273 0.49256105068746153
+2021-11-14 23:25:52,963 INFO     
+2021-11-14 23:25:52,963 INFO     [rollout0] [0, 4, 2, 5, 2, 0, 2, 0, 4, 2, 0, 2, 4, 5]
+2021-11-14 23:25:52,963 INFO     [rollout1] [2, 0, 2, 3, 2, 0, 3, 4, 1, 2, 4, 5, 5]
+2021-11-14 23:25:52,963 INFO     [rollout2] [3, 4, 5, 0, 3, 4, 2, 1, 1, 0, 3, 0, 2, 1, 4, 1, 4, 6]
+2021-11-14 23:25:52,963 INFO     [reward] 0.30487000000000036
+2021-11-14 23:25:52,963 INFO     [error] [-7.24378335e-06  8.11458747e-05]
+2021-11-14 23:25:52,964 INFO     
+2021-11-14 23:25:52,964 INFO     [min reward] 0.08498880195456793
+2021-11-14 23:25:52,964 INFO     
+2021-11-14 23:25:52,964 INFO     [max steps] 2
+2021-11-14 23:39:41,831 INFO     [step] 2258100
+2021-11-14 23:39:41,831 INFO     [task] make[plank] 0.20340012401906188 0.49000682460758505
+2021-11-14 23:39:41,831 INFO     [task] make[stick] 0.34709373260549986 0.10776394837448619
+2021-11-14 23:39:41,831 INFO     [task] make[cloth] 0.2553465302898289 0.382644791460763
+2021-11-14 23:39:41,831 INFO     [task] make[rope] 0.1941596130856093 0.5137099268116689
+2021-11-14 23:39:41,831 INFO     
+2021-11-14 23:39:41,831 INFO     [rollout0] [3, 0, 5, 2, 0, 2, 0, 4, 2, 2, 4, 4, 1, 2, 0, 4, 1, 6]
+2021-11-14 23:39:41,831 INFO     [rollout1] [2, 4, 1, 4, 2, 4, 5, 0, 4, 0, 4, 3, 4, 5]
+2021-11-14 23:39:41,832 INFO     [rollout2] [3, 4, 1, 5, 3, 1, 4, 5]
+2021-11-14 23:39:41,832 INFO     [reward] 0.3344699999999997
+2021-11-14 23:39:41,832 INFO     [error] [-4.95967930e-05  8.25554537e-05]
+2021-11-14 23:39:41,832 INFO     
+2021-11-14 23:39:41,832 INFO     [min reward] 0.10776394837448619
+2021-11-14 23:39:41,832 INFO     
+2021-11-14 23:39:41,832 INFO     [max steps] 2
+2021-11-14 23:53:39,056 INFO     [step] 2358100
+2021-11-14 23:53:39,057 INFO     [task] make[plank] 0.2042493349951669 0.503280133163615
+2021-11-14 23:53:39,057 INFO     [task] make[stick] 0.35439140795282126 0.1325990196630796
+2021-11-14 23:53:39,057 INFO     [task] make[cloth] 0.2464203189843682 0.43655583005953585
+2021-11-14 23:53:39,057 INFO     [task] make[rope] 0.19493893806764365 0.545266958988909
+2021-11-14 23:53:39,057 INFO     
+2021-11-14 23:53:39,057 INFO     [rollout0] [1, 4, 1, 3, 4, 5, 1, 3, 1, 2, 4, 2, 1, 4, 1, 2, 4, 5]
+2021-11-14 23:53:39,057 INFO     [rollout1] [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 3, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 2, 4, 6]
+2021-11-14 23:53:39,057 INFO     [rollout2] [5, 2, 1, 2, 4, 4, 1, 2, 1, 1, 1, 2, 1, 2, 2, 6]
+2021-11-14 23:53:39,057 INFO     [reward] 0.3633600000000001
+2021-11-14 23:53:39,057 INFO     [error] [-5.73866093e-05  9.94377217e-05]
+2021-11-14 23:53:39,057 INFO     
+2021-11-14 23:53:39,058 INFO     [min reward] 0.1325990196630796
+2021-11-14 23:53:39,058 INFO     
+2021-11-14 23:53:39,058 INFO     [max steps] 2
+2021-11-15 00:07:24,655 INFO     [step] 2458100
+2021-11-15 00:07:24,714 INFO     [task] make[plank] 0.20918972590377455 0.5204057448926388
+2021-11-15 00:07:24,714 INFO     [task] make[stick] 0.3622184220451096 0.17526460538378197
+2021-11-15 00:07:24,714 INFO     [task] make[cloth] 0.23673559412600792 0.46118951612903225
+2021-11-15 00:07:24,714 INFO     [task] make[rope] 0.19185625792510777 0.5611058749607288
+2021-11-15 00:07:24,714 INFO     
+2021-11-15 00:07:24,714 INFO     [rollout0] [4, 1, 4, 3, 0, 0, 3, 4, 4, 4, 4, 3, 0, 1, 6, 2, 4, 0, 2, 2, 0, 4, 5]
+2021-11-15 00:07:24,714 INFO     [rollout1] [2, 4, 5, 0, 2, 0, 2, 1, 2, 0, 4, 0, 4, 4, 0, 4, 4, 6]
+2021-11-15 00:07:24,714 INFO     [rollout2] [3, 3, 3, 1, 3, 4, 0, 5, 3, 4, 5]
+2021-11-15 00:07:24,714 INFO     [reward] 0.3898399999999998
+2021-11-15 00:07:24,714 INFO     [error] [-1.03494191e-05  9.82805934e-05]
+2021-11-15 00:07:24,714 INFO     
+2021-11-15 00:07:24,715 INFO     [min reward] 0.17526460538378197
+2021-11-15 00:07:24,715 INFO     
+2021-11-15 00:07:24,715 INFO     [max steps] 2
+2021-11-15 00:21:16,190 INFO     [step] 2558100
+2021-11-15 00:21:16,191 INFO     [task] make[plank] 0.21084712823979465 0.557087175587033
+2021-11-15 00:21:16,191 INFO     [task] make[stick] 0.3594845302184901 0.2156036287508723
+2021-11-15 00:21:16,191 INFO     [task] make[cloth] 0.23634900382299417 0.5073098799241627
+2021-11-15 00:21:16,191 INFO     [task] make[rope] 0.19331933771872103 0.5860220595814865
+2021-11-15 00:21:16,191 INFO     
+2021-11-15 00:21:16,191 INFO     [rollout0] [1, 1, 3, 1, 4, 1, 5, 2, 2, 1, 2, 2, 1, 1, 2, 4, 5]
+2021-11-15 00:21:16,191 INFO     [rollout1] [1, 3, 3, 5, 1, 4, 1, 4, 4, 4, 4, 4, 4, 3, 0, 4, 3, 1, 6]
+2021-11-15 00:21:16,191 INFO     [rollout2] [3, 3, 0, 1, 4, 3, 1, 3, 4, 5, 2, 2, 2, 2, 2, 2, 4, 5]
+2021-11-15 00:21:16,191 INFO     [reward] 0.42854999999999976
+2021-11-15 00:21:16,191 INFO     [error] [-7.55351912e-05  8.94570556e-05]
+2021-11-15 00:21:16,191 INFO     
+2021-11-15 00:21:16,191 INFO     [min reward] 0.2156036287508723
+2021-11-15 00:21:16,191 INFO     
+2021-11-15 00:21:16,191 INFO     [max steps] 2
+2021-11-15 00:33:24,328 INFO     [step] 2658100
+2021-11-15 00:33:24,329 INFO     [task] make[plank] 0.2083337455027975 0.5648304879818156
+2021-11-15 00:33:24,329 INFO     [task] make[stick] 0.36541153731001164 0.26353505354077544
+2021-11-15 00:33:24,329 INFO     [task] make[cloth] 0.23123062518353335 0.5128491620111731
+2021-11-15 00:33:24,329 INFO     [task] make[rope] 0.1950240920036575 0.5858825961140968
+2021-11-15 00:33:24,329 INFO     
+2021-11-15 00:33:24,329 INFO     [rollout0] [3, 4, 0, 3, 5, 0, 0, 2, 4, 5]
+2021-11-15 00:33:24,329 INFO     [rollout1] [3, 4, 1, 2, 1, 2, 4, 5, 0, 4, 2, 1, 3, 2, 1, 3, 0, 4, 2, 1, 4, 5]
+2021-11-15 00:33:24,329 INFO     [rollout2] [3, 3, 0, 3, 4, 5, 3, 0, 3, 4, 0, 2, 4, 4, 3, 1, 1, 3, 4, 5]
+2021-11-15 00:33:24,329 INFO     [reward] 0.44622999999999996
+2021-11-15 00:33:24,329 INFO     [error] [-3.95382251e-05  1.02014906e-04]
+2021-11-15 00:33:24,329 INFO     
+2021-11-15 00:33:24,329 INFO     [min reward] 0.26353505354077544
+2021-11-15 00:33:24,330 INFO     
+2021-11-15 00:33:24,330 INFO     [max steps] 2
+2021-11-15 00:45:21,119 INFO     [step] 2758100
+2021-11-15 00:45:21,119 INFO     [task] make[plank] 0.21069096648132066 0.5788546674917885
+2021-11-15 00:45:21,119 INFO     [task] make[stick] 0.35328884114484677 0.31089036055923475
+2021-11-15 00:45:21,119 INFO     [task] make[cloth] 0.23529282153218464 0.5440138613024553
+2021-11-15 00:45:21,119 INFO     [task] make[rope] 0.200727370841648 0.6019703940788158
+2021-11-15 00:45:21,119 INFO     
+2021-11-15 00:45:21,119 INFO     [rollout0] [4, 3, 4, 1, 4, 1, 4, 1, 4, 4, 3, 4, 5, 1, 2, 4, 3, 1, 4, 4, 1, 3, 3, 3, 3, 4, 5]
+2021-11-15 00:45:21,119 INFO     [rollout1] [3, 1, 1, 1, 2, 4, 1, 2, 5, 1, 4, 4, 4, 2, 4, 5]
+2021-11-15 00:45:21,120 INFO     [rollout2] [3, 4, 5, 2, 0, 2, 0, 2, 0, 0, 3, 4, 1, 2, 0, 0, 0, 6]
+2021-11-15 00:45:21,120 INFO     [reward] 0.48054999999999937
+2021-11-15 00:45:21,120 INFO     [error] [-3.72221814e-05  9.44310689e-05]
+2021-11-15 00:45:21,120 INFO     
+2021-11-15 00:45:21,120 INFO     [min reward] 0.31089036055923475
+2021-11-15 00:45:21,120 INFO     
+2021-11-15 00:45:21,120 INFO     [max steps] 2
+2021-11-15 00:57:29,038 INFO     [step] 2858100
+2021-11-15 00:57:29,039 INFO     [task] make[plank] 0.21511332223949456 0.6155419222903885
+2021-11-15 00:57:29,039 INFO     [task] make[stick] 0.3488099854285073 0.36586063814565745
+2021-11-15 00:57:29,039 INFO     [task] make[cloth] 0.232496605795619 0.5844947363934706
+2021-11-15 00:57:29,039 INFO     [task] make[rope] 0.20358008653637918 0.643305439330544
+2021-11-15 00:57:29,039 INFO     
+2021-11-15 00:57:29,039 INFO     [rollout0] [0, 0, 4, 4, 4, 2, 0, 3, 0, 0, 3, 1, 5, 2, 0, 2, 4, 2, 4, 2, 4, 4, 4, 4, 2, 4, 4, 6]
+2021-11-15 00:57:29,039 INFO     [rollout1] [2, 4, 5, 2, 2, 1, 2, 0, 1, 2, 0, 1, 2, 0, 2, 1, 1, 6]
+2021-11-15 00:57:29,039 INFO     [rollout2] [3, 4, 3, 0, 4, 1, 3, 5, 0, 4, 5]
+2021-11-15 00:57:29,039 INFO     [reward] 0.5265799999999995
+2021-11-15 00:57:29,039 INFO     [error] [2.88595046e-05 9.95402319e-05]
+2021-11-15 00:57:29,039 INFO     
+2021-11-15 00:57:29,039 INFO     [min reward] 0.36586063814565745
+2021-11-15 00:57:29,040 INFO     
+2021-11-15 00:57:29,040 INFO     [max steps] 2
+2021-11-15 01:09:29,106 INFO     [step] 2958100
+2021-11-15 01:09:29,106 INFO     [task] make[plank] 0.21545699543065175 0.6423435542979079
+2021-11-15 01:09:29,107 INFO     [task] make[stick] 0.3518354405355161 0.4015274571827534
+2021-11-15 01:09:29,107 INFO     [task] make[cloth] 0.23241528268076436 0.6139764201500536
+2021-11-15 01:09:29,107 INFO     [task] make[rope] 0.20029228135306792 0.6583612123633096
+2021-11-15 01:09:29,107 INFO     
+2021-11-15 01:09:29,107 INFO     [rollout0] [2, 4, 1, 4, 5, 5]
+2021-11-15 01:09:29,107 INFO     [rollout1] [0, 3, 0, 3, 3, 4, 1, 5, 4, 5]
+2021-11-15 01:09:29,107 INFO     [rollout2] [2, 0, 2, 0, 4, 1, 5, 2, 4, 3, 2, 2, 2, 0, 0, 2, 4, 5]
+2021-11-15 01:09:29,107 INFO     [reward] 0.5544299999999992
+2021-11-15 01:09:29,107 INFO     [error] [-5.20735738e-05  1.03102528e-04]
+2021-11-15 01:09:29,107 INFO     
+2021-11-15 01:09:29,107 INFO     [min reward] 0.4015274571827534
+2021-11-15 01:09:29,107 INFO     
+2021-11-15 01:09:29,107 INFO     [max steps] 2
+2021-11-15 01:21:23,197 INFO     [step] 3058100
+2021-11-15 01:21:23,198 INFO     [task] make[plank] 0.21328361139595922 0.6498296064609496
+2021-11-15 01:21:23,198 INFO     [task] make[stick] 0.352985029596086 0.43213741749873075
+2021-11-15 01:21:23,198 INFO     [task] make[cloth] 0.22973985712953857 0.6405143577045049
+2021-11-15 01:21:23,198 INFO     [task] make[rope] 0.2039915018784161 0.6873072714612554
+2021-11-15 01:21:23,198 INFO     
+2021-11-15 01:21:23,198 INFO     [rollout0] [2, 0, 2, 4, 1, 4, 2, 5, 0, 4, 2, 0, 3, 3, 2, 4, 3, 4, 3, 0, 0, 3, 6]
+2021-11-15 01:21:23,198 INFO     [rollout1] [4, 3, 1, 3, 4, 0, 2, 1, 4, 5, 2, 0, 2, 0, 2, 0, 4, 2, 2, 1, 2, 4, 2, 2, 6]
+2021-11-15 01:21:23,198 INFO     [rollout2] [2, 0, 0, 0, 3, 1, 0, 2, 0, 2, 2, 0, 4, 0, 6, 2, 4, 4, 4, 4, 2, 4, 2, 2, 2, 4, 2, 4, 4, 6]
+2021-11-15 01:21:23,198 INFO     [reward] 0.5780399999999996
+2021-11-15 01:21:23,198 INFO     [error] [-6.04496381e-05  1.08170367e-04]
+2021-11-15 01:21:23,199 INFO     
+2021-11-15 01:21:23,199 INFO     [min reward] 0.43213741749873075
+2021-11-15 01:21:23,199 INFO     

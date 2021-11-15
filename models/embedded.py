@@ -123,8 +123,6 @@ class EmbeddedModel(object):
         self.subtask_embeddings = []
         for i_module in range(1, self.n_modules):
             subtask = trainer.subtask_index.get(i_module)
-            print(len(trainer.subtask_index))
-            print(subtask)
             self.subtask_embeddings.append(embeddings[subtask])
         self.subtask_embeddings = np.array(self.subtask_embeddings, dtype=np.float32)
 
@@ -273,7 +271,7 @@ class EmbeddedModel(object):
 
             feed_dict = {
                 self.inputs.t_feats: [self.featurize(states[i], mstates[i]) for i in indices],
-                self.inputs.t_arg: [self.subtasks[indices[0]][i_subtask]]
+                self.inputs.t_arg: [self.subtasks[i][i_subtask] for i in indices]
             }
             # if self.config.model.use_args:
             #     feed_dict[self.inputs.t_arg] = [mstates[i].arg for i in indices]
@@ -354,7 +352,8 @@ class EmbeddedModel(object):
                 feed_dict = {
                     self.inputs.t_feats: feats1,
                     self.inputs.t_action_mask: a_mask,
-                    self.inputs.t_reward: r
+                    self.inputs.t_reward: r,
+                    self.inputs.t_arg: [m.action for m in m1]
                 }
                 # if self.config.model.use_args:
                 #     feed_dict[self.inputs.t_arg] = args1

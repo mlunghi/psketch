@@ -167,7 +167,8 @@ class CurriculumTrainer(object):
                     i_task = self.task_index[task]
                     score = 1. * task_rewards[i_task] / task_counts[i_task]
                     logging.info("[task] %s[%s] %s %s", 
-                            self.subtask_index.get(task.goal[0]),
+                            task.goal[0],
+                            # self.subtask_index.get(task.goal[0]),
                             self.cookbook.index.get(task.goal[1]),
                             task_probs[i],
                             score)
