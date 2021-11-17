@@ -65,11 +65,16 @@ class EmbeddedModel(object):
 
         def build_actor(index, t_input, t_action_mask, extra_params=[]):
             with tf.compat.v1.variable_scope("actor_%s" % index):
-                t_action_score, v_action = net.mlp(t_input, (N_HIDDEN, self.n_actions))
+                if self.config.model.size == "large":
+                    t_action_score, v_action = net.mlp(t_input, (512, 256, 128, self.n_actions))
+                    logging.info("USING LARGE MODEL, NUMBER OF PARAMS: {}".format(len(v_action)))
+                else:
+                    t_action_score, v_action = net.mlp(t_input, (N_HIDDEN, self.n_actions))
+                    logging.info("USING SMALL MODEL, NUMBER OF PARAMS: {}".format(len(v_action)))
 
                 # TODO this is pretty gross
                 v_bias = v_action[-1]
-                assert "b1" in v_bias.name
+                assert "b1" in v_bias.name or "b3" in v_bias.name
                 t_decrement_op = v_bias[-1].assign(v_bias[-1] - 3)
 
                 t_action_logprobs = tf.nn.log_softmax(t_action_score)

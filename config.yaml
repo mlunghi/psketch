@@ -1,4 +1,4 @@
-name: craft_embedded_model
+name: 
 recipes: "resources/craft/recipes.yaml"
 world: 
   name: CraftWorld
@@ -8,6 +8,7 @@ model:
   featurize_plan: false
   max_subtask_timesteps: 15
   baseline: state
+  size: large
 trainer: 
   name: CurriculumTrainer
   use_curriculum: true
