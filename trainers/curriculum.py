@@ -121,9 +121,13 @@ class CurriculumTrainer(object):
         i_iter = 0
 
         task_probs = []
-        while i_iter < N_ITERS:
+        final_stage_flag = 0
+        while len([t for t in self.tasks if len(t.steps) <= max_steps]) <= 10 and final_stage_flag < 1000000:
             logging.info("[max steps] %d", max_steps)
             min_reward = np.inf
+
+            if len([t for t in self.tasks if len(t.steps) <= max_steps]) == 10:
+                final_stage_flag += 1
 
             # TODO refactor
             for _ in range(1):
