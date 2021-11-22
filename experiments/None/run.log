@@ -1,0 +1,25 @@
+2021-11-17 16:32:25,902 INFO     BEGIN
+2021-11-17 16:32:25,903 INFO     struct {
+    name: None
+    recipes: 'resources/craft/recipes.yaml'
+    world:
+        name: 'CraftWorld'
+    model:
+        name: 'EmbeddedModel'
+        use_args: False
+        featurize_plan: False
+        max_subtask_timesteps: 15
+        baseline: 'state'
+        size: 'large'
+    trainer:
+        name: 'CurriculumTrainer'
+        use_curriculum: True
+        improvement_threshold: 0.8
+        hints: 'resources/craft/hints.yaml'
+        max_timesteps: 100
+    experiment_dir: 'experiments/None'
+}
+2021-11-17 16:32:25,964 INFO     USING LARGE MODEL, NUMBER OF PARAMS: 8
+2021-11-17 16:32:26,172 WARNING  From /users/mlunghi/anaconda/reAI/lib/python3.8/site-packages/tensorflow/python/training/rmsprop.py:192: calling Ones.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
