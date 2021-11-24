@@ -124,15 +124,17 @@ class EmbeddedModel(object):
         t_reward = tf.compat.v1.placeholder(tf.float32, shape=(None,))
 
         if self.config.synonyms is not None:
-            with open(self.config.synonyms, "r" as fin:
-                embeddings = json.loads(fin)
-                embeddings = {k.split("/")[0], v for k, v in embeddings.items()}
+            logging.info("USING {}".format(self.config.synonyms))
+            with open(self.config.synonyms, "r") as fin:
+                embeddings = json.load(fin)
+                embeddings = {k.split("/")[0]: v for k, v in embeddings.items()}
             self.subtask_embeddings = []
             for i_module in range(1, self.n_modules):
                 subtask = trainer.subtask_index.get(i_module)
                 self.subtask_embeddings.append(embeddings[subtask])
             self.subtask_embeddings = np.array(self.subtask_embeddings, dtype=np.float32)
         else:
+            logging.info("USING word2vec/concatenated.json")   
             with open("word2vec/concatenated.json", "r") as fin:
                 embeddings = json.load(fin)
             self.subtask_embeddings = []

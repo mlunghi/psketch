@@ -39,7 +39,7 @@ def configure():
                 "Experiment %s does not exist!" % config.experiment_dir
 
         # set up logging
-        log_name = os.path.join(config.experiment_dir, "{}.log".format(config.synonyms))
+        log_name = os.path.join(config.experiment_dir, "{}.log".format(config.synonyms.split("/")[-1]))
         logging.basicConfig(filename=log_name, level=logging.DEBUG,
                 format='%(asctime)s %(levelname)-8s %(message)s')
         def handler(type, value, tb):

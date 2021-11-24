@@ -6,6 +6,6 @@
 
 module load anaconda/2020.02
 source /gpfs/runtime/opt/anaconda/2020.02/etc/profile.d/conda.sh
-conda activate reAI
+conda activate csci2951x
 
 python3 main.py

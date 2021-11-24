@@ -199,6 +199,7 @@ class CurriculumTrainer(object):
             if min_reward > self.config.trainer.improvement_threshold:
                 max_steps += 1
                 model.save()
+        model.save()
 
     def evaluate(self, model, world):
         model.prepare(world, self)
@@ -239,7 +240,6 @@ class CurriculumTrainer(object):
                 err = None
                 # get enough samples for one training step
                 while err is None:
-                    i_iter += N_BATCH
                     transitions, reward = self.do_rollout(model, world, 
                             possible_tasks, task_probs)
                     for t in transitions:
@@ -254,7 +254,6 @@ class CurriculumTrainer(object):
                 total_err += err
 
             # log
-            logging.info("[step] %d", i_iter)
             scores = []
             for i, task in enumerate(possible_tasks):
                 i_task = self.task_index[task]
