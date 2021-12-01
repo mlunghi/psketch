@@ -1,0 +1,44 @@
+2021-11-29 11:20:06,464 INFO     BEGIN
+2021-11-29 11:20:06,465 INFO     struct {
+    name: 'craft_embedded_model_10M'
+    recipes: 'resources/craft/recipes.yaml'
+    world:
+        name: 'CraftWorld'
+    model:
+        name: 'EmbeddedModel'
+        use_args: False
+        featurize_plan: False
+        max_subtask_timesteps: 15
+        baseline: 'state'
+        size: 'small'
+    trainer:
+        name: 'CurriculumTrainer'
+        use_curriculum: True
+        improvement_threshold: 0.8
+        hints: 'resources/craft/hints.yaml'
+        max_timesteps: 100
+    synonyms: 'word2vec/synonyms_2.json'
+    experiment_dir: 'experiments/craft_embedded_model_10M'
+}
+2021-11-29 11:20:06,482 INFO     USING word2vec/synonyms_2.json
+2021-11-29 11:20:06,656 INFO     USING SMALL MODEL, NUMBER OF PARAMS: 4
+2021-11-29 11:20:06,790 WARNING  From /users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/training/rmsprop.py:123: calling Ones.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2021-11-29 11:20:31,588 INFO     loaded experiments/craft_embedded_model_10M/modular_ac.chk
+2021-11-29 11:20:31,589 INFO     Restoring parameters from experiments/craft_embedded_model_10M/modular_ac.chk
+2021-11-29 11:20:31,790 INFO     [max steps] 3
+2021-11-29 11:29:40,319 INFO     [task] make[plank] 0.2 0.9437695244706699
+2021-11-29 11:29:40,319 INFO     [task] make[stick] 0.2 0.8862030682276948
+2021-11-29 11:29:40,320 INFO     [task] make[cloth] 0.2 0.9163816604708798
+2021-11-29 11:29:40,320 INFO     [task] make[rope] 0.2 0.9314681076713297
+2021-11-29 11:29:40,320 INFO     [task] make[bridge] 0.2 0.7227683249338855
+2021-11-29 11:29:40,320 INFO     
+2021-11-29 11:29:40,320 INFO     [rollout0] [3, 4, 3, 3, 4, 5, 3, 1, 3, 4, 5]
+2021-11-29 11:29:40,320 INFO     [rollout1] [2, 4, 5, 2, 0, 4, 0, 4, 5]
+2021-11-29 11:29:40,320 INFO     [rollout2] [3, 3, 3, 0, 2, 3, 0, 2, 3, 0, 2, 3, 0, 2, 6, 3, 2, 3, 2, 3, 0, 4, 2, 3, 0, 3, 3, 3, 3, 6]
+2021-11-29 11:29:40,320 INFO     [reward] 0.8801099999999975
+2021-11-29 11:29:40,320 INFO     [error] [-2.66134518e-05  7.63692046e-05]
+2021-11-29 11:29:40,320 INFO     
+2021-11-29 11:29:40,320 INFO     [min reward] 0.7227683249338855
+2021-11-29 11:29:40,320 INFO     

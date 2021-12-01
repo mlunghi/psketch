@@ -16,6 +16,8 @@ import yaml
 
 import shutil
 
+import argparse
+
 def main():
     tf.compat.v1.disable_eager_execution()
     config = configure()
@@ -31,6 +33,12 @@ def configure():
     # load config
     with open("config.yaml") as config_f:
         config = Struct(**yaml.load(config_f, Loader=yaml.FullLoader))
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--synonyms")
+    args = parser.parse_args()
+    if config.synonyms is None and args.synonyms is not None:
+        config.synonyms = args.synonyms
 
     if config.synonyms is not None:
         # set up experiment

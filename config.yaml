@@ -15,4 +15,4 @@ trainer:
   improvement_threshold: 0.8
   hints: "resources/craft/hints.yaml"
   max_timesteps: 100
-synonyms:
+synonyms: 

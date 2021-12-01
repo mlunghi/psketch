@@ -1,6 +1,7 @@
 import json
+import numpy as np
 
-if __name__ == "__main__":
+def synonyms():
     with open("synonyms.txt", "r") as f1, open("concatenated.json", "r") as f2:
         mapping = {"get": ["acquire", "obtain"], "use": ["utilize", "apply"]}
         lines = f1.readlines()
@@ -23,3 +24,32 @@ if __name__ == "__main__":
             with open("synonyms_{}.json".format(i), "w") as fout:
                 json.dump(embeddings[embedding], fout)
 
+def noise():
+    with open("concatenated.json", "r") as f1:        
+        obj = json.load(f1)
+        for subtask, embedding in obj.items():
+            for i in range(100):
+                embedding[i] = np.random.normal()
+
+        with open("noise.json", "w") as fout:
+            json.dump(obj, fout)
+
+def swap():
+    with open("tokens.json") as f1, open("concatenated.json", "r") as f2:
+        obj1 = json.load(f1)   
+        obj2 = json.load(f2)
+        for subtask, embedding in obj2.items():
+            if "get" in subtask:
+                for i in range(100):
+                    embedding[i] = obj1["use"][i]
+            elif "use" in subtask:
+                for i in range(100):
+                    embedding[i] = obj1["get"][i]
+            else:
+                raise Exception()
+
+        with open("swap.json", "w") as fout:
+            json.dump(obj2, fout)
+
+if __name__ == "__main__":
+    swap()
