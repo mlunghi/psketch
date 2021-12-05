@@ -73,7 +73,7 @@ def create_subtask_embeddings():
                                 subtask_embedding += embeddings[token]
                             else:
                                 tokens.append(original_tokens[i])
-                                subtask_embedding += embedding[i:(i+EMBEDDING_DIMENSION)]
+                                subtask_embedding += embedding[100*i:100*i+EMBEDDING_DIMENSION]
                         subtask_embeddings["_".join(original_tokens)+"/"+"_".join(tokens)] = subtask_embedding
 
                 with open(os.path.join(directory, "subtask_embeddings", "subtask_embeddings_" + transformation[0].upper() + ".json"), "w") as f:
