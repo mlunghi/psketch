@@ -1,4 +1,4 @@
-name: craft_embedded_model_10M
+name: deeper_network_more_iters
 recipes: "resources/craft/recipes.yaml"
 world: 
   name: CraftWorld

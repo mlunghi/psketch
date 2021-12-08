@@ -1,0 +1,48 @@
+2021-12-05 12:43:04,788 INFO     BEGIN
+2021-12-05 12:43:04,789 INFO     struct {
+    name: 'deeper_network_more_iters'
+    recipes: 'resources/craft/recipes.yaml'
+    world:
+        name: 'CraftWorld'
+    model:
+        name: 'EmbeddedModel'
+        use_args: False
+        featurize_plan: False
+        max_subtask_timesteps: 15
+        baseline: 'state'
+        size: 'small'
+    trainer:
+        name: 'CurriculumTrainer'
+        use_curriculum: True
+        improvement_threshold: 0.8
+        hints: 'resources/craft/hints.yaml'
+        max_timesteps: 100
+    synonyms: 'word2vec/nouns/subtask_embeddings/subtask_embeddings_RELATED.json'
+    experiment_dir: 'experiments/deeper_network_more_iters'
+}
+2021-12-05 12:43:04,805 INFO     USING word2vec/nouns/subtask_embeddings/subtask_embeddings_RELATED.json
+2021-12-05 12:43:04,989 INFO     USING SMALL MODEL, NUMBER OF PARAMS: 4
+2021-12-05 12:43:05,128 WARNING  From /users/tliu46/anaconda/csci2951x/lib/python3.8/site-packages/tensorflow/python/training/rmsprop.py:123: calling Ones.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2021-12-05 12:43:32,054 INFO     loaded experiments/deeper_network_more_iters/modular_ac.chk
+2021-12-05 12:43:32,054 INFO     Restoring parameters from experiments/deeper_network_more_iters/modular_ac.chk
+2021-12-05 12:43:32,288 INFO     [max steps] 4
+2021-12-05 12:55:55,275 INFO     [task] make[plank] 0.1111111111111111 0.5857735762047498
+2021-12-05 12:55:55,276 INFO     [task] make[stick] 0.1111111111111111 0.4875014533193815
+2021-12-05 12:55:55,276 INFO     [task] make[cloth] 0.1111111111111111 0.7170669153648869
+2021-12-05 12:55:55,276 INFO     [task] make[rope] 0.1111111111111111 0.6444523639819435
+2021-12-05 12:55:55,276 INFO     [task] make[bridge] 0.1111111111111111 0.6388500931098696
+2021-12-05 12:55:55,276 INFO     [task] make[bed] 0.1111111111111111 0.0
+2021-12-05 12:55:55,276 INFO     [task] make[axe] 0.1111111111111111 0.0
+2021-12-05 12:55:55,276 INFO     [task] make[shears] 0.1111111111111111 0.15571861169345447
+2021-12-05 12:55:55,276 INFO     [task] get[gold] 0.1111111111111111 0.0
+2021-12-05 12:55:55,276 INFO     
+2021-12-05 12:55:55,276 INFO     [rollout0] [3, 4, 0, 5, 5, 4, 2, 4, 2, 2, 4, 0, 0, 0, 4, 3, 0, 4, 5, 5]
+2021-12-05 12:55:55,276 INFO     [rollout1] [0, 1, 4, 5, 3, 3, 3, 2, 0, 0, 2, 0, 3, 1, 3, 4, 3, 1, 6, 5, 4, 5]
+2021-12-05 12:55:55,276 INFO     [rollout2] [2, 4, 5, 0, 2, 2, 2, 2, 0, 0, 0, 1, 0, 0, 2, 0, 2, 6]
+2021-12-05 12:55:55,276 INFO     [reward] 0.3594285714285708
+2021-12-05 12:55:55,276 INFO     [error] [-1.11948693e-05  6.54927257e-05]
+2021-12-05 12:55:55,276 INFO     
+2021-12-05 12:55:55,276 INFO     [min reward] 0.0
+2021-12-05 12:55:55,277 INFO     

@@ -1,0 +1,41 @@
+2021-12-05 12:45:12,789 INFO     BEGIN
+2021-12-05 12:45:12,789 INFO     struct {
+    name: 'deeper_network_more_iters'
+    recipes: 'resources/craft/recipes.yaml'
+    world:
+        name: 'CraftWorld'
+    model:
+        name: 'EmbeddedModel'
+        use_args: False
+        featurize_plan: False
+        max_subtask_timesteps: 15
+        baseline: 'state'
+        size: 'small'
+    trainer:
+        name: 'CurriculumTrainer'
+        use_curriculum: True
+        improvement_threshold: 0.8
+        hints: 'resources/craft/hints.yaml'
+        max_timesteps: 100
+    synonyms: 'word2vec/nouns/subtask_embeddings/subtask_embeddings_NOISE.JSON'
+    experiment_dir: 'experiments/deeper_network_more_iters'
+}
+2021-12-05 12:45:12,809 INFO     USING word2vec/nouns/subtask_embeddings/subtask_embeddings_NOISE.JSON
+2021-12-05 12:45:12,810 ERROR    Uncaught exception: [Errno 2] No such file or directory: 'word2vec/nouns/subtask_embeddings/subtask_embeddings_NOISE.JSON'
+NoneType: None
+2021-12-05 12:45:12,813 ERROR    Traceback (most recent call last):
+
+  File "main.py", line 84, in <module>
+    main()
+
+  File "main.py", line 28, in main
+    trainer.evaluate(model, world)
+
+  File "/gpfs/data/sbach/tliu46/psketch/trainers/curriculum.py", line 205, in evaluate
+    model.prepare(world, self)
+
+  File "/gpfs/data/sbach/tliu46/psketch/models/embedded.py", line 128, in prepare
+    with open(self.config.synonyms, "r") as fin:
+
+FileNotFoundError: [Errno 2] No such file or directory: 'word2vec/nouns/subtask_embeddings/subtask_embeddings_NOISE.JSON'
+NoneType: None
