@@ -10,7 +10,8 @@ import yaml
 
 import os
 
-N_ITERS = 10000000 #3000000
+# change this 
+N_ITERS = 1 #3000000
 N_UPDATE = 500
 N_BATCH = 100
 IMPROVEMENT_THRESHOLD = 0.8

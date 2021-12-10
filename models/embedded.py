@@ -9,6 +9,7 @@ import tensorflow as tf
 from tensorflow.python.framework.ops import IndexedSlicesValue
 
 import json
+from IPython import embed;
 
 N_UPDATE = 2000
 N_BATCH = 2000
@@ -281,7 +282,7 @@ class EmbeddedModel(object):
             if i_subtask >= len(self.subtasks[indices[0]]):
                 continue
             actor = self.actors[self.subtasks[indices[0]][i_subtask]]
-
+            #print(i_subtask)
             # i_subtask: index of the current subtask for a current task?
             # self.subtasks[indices[0]][i_subtask]: index of the subtask across all tasks?
             # self.subtasks -- batch size X list of subtasks
@@ -330,32 +331,40 @@ class EmbeddedModel(object):
             experiences = self.experiences
         else:
             experiences = [e for e in self.experiences if e.m1.action == action]
+        # print out expereinces 
         if len(experiences) < N_UPDATE:
             return None
+        # get the number of experiences within a batch 
         batch = experiences[:N_UPDATE]
 
+        # setup by by_mod 
         by_mod = defaultdict(list)
         for e in batch:
             by_mod[e.m1.task, e.m1.action].append(e)
 
         grads = {}
         params = {}
+        # print out what's in grads
         for module in list(self.actors.values()) + list(self.critics.values()):
             for param in module.params:
                 if param.name not in grads:
                     grads[param.name] = np.zeros(param.get_shape(), np.float32)
                     params[param.name] = param
         touched = set()
-
+        #checked here #1: embed()
         total_actor_err = 0
         total_critic_err = 0
         for i_task, i_mod1 in by_mod:
+            # print out i_task, i_mod1 
             actor = self.actors[i_mod1]
             critic = self.critics[i_task, i_mod1]
             actor_trainer = self.actor_trainers[i_task, i_mod1]
             critic_trainer = self.critic_trainers[i_task, i_mod1]
 
+            # print out actor / trainer  --> try to understand the logic here 
             all_exps = by_mod[i_task, i_mod1]
+            # look at all_exps 
+            embed()
             for i_batch in range(int(np.ceil(1. * len(all_exps) / N_BATCH))):
                 exps = all_exps[i_batch * N_BATCH : (i_batch + 1) * N_BATCH]
                 s1, m1, a, s2, m2, r = zip(*exps)
