@@ -59,6 +59,7 @@ for experiment in data.keys():
             recs.append(mpatches.Rectangle((0,0),1,1,fc=class_colours[i]))
 
         plt.legend(recs,classes,bbox_to_anchor=(1.1, 1.05))
+        plt.ylim(0,1)
         plt.show()
     else:
         for idx, type in enumerate(data[experiment]):
@@ -86,4 +87,5 @@ for experiment in data.keys():
             recs.append(mpatches.Rectangle((0,0),1,1,fc=class_colours[i]))
 
         plt.legend(recs,classes,bbox_to_anchor=(1.1, 1.05))
+        plt.ylim(0,1)
         plt.show()
