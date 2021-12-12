@@ -50,7 +50,7 @@ for experiment in data.keys():
             i += 1
 
         plt.title("Experiment " + str(counter) + ": " + str(experiment))
-        classes = ["1", "2", "3", "4", "5"]
+        classes = ["synonym", "related", "random", "noise", "most similar"]
         class_colours = ['#8A2BE2','#6495ED','#00FFFF', '#98FB98', '#FFA500']
         recs = []
         import matplotlib.patches as mpatches
@@ -77,7 +77,7 @@ for experiment in data.keys():
             i += 1
 
         plt.title("Experiment " + str(counter) + ": " + str(experiment))
-        classes = ["1", "2", "3", "4", "5", "6"]
+        classes = ["synonym", "related", "random", "noise", "most similar", "antonym"]
         class_colours = ['#8A2BE2','#6495ED','#00FFFF', '#98FB98', '#FFA500', 'red']
         recs = []
         import matplotlib.patches as mpatches
